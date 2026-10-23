@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduLab AI — banc d'essai (Personne 3)</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <style>
+    :root { --brand: #5b3df5; --ok: #1a7f4b; --bad: #c0392b; --line: #dcdff0; }
+    * { box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; margin: 0; background: #f6f7fc; color: #1f2340; }
+    header { background: var(--brand); color: #fff; padding: .8rem 1.2rem; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+    header h1 { font-size: 1.1rem; margin: 0; }
+    #net { padding: .2rem .7rem; border-radius: 99px; font-size: .85rem; background: #fff3; }
+    main { display: grid; gap: 1rem; padding: 1rem; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); }
+    section { background: #fff; border: 1px solid var(--line); border-radius: .7rem; padding: 1rem; }
+    h2 { margin: 0 0 .6rem; font-size: 1rem; color: var(--brand); }
+    input, select, button { font: inherit; padding: .45rem .6rem; border: 1px solid var(--line); border-radius: .4rem; }
+    input, select { width: 100%; margin-bottom: .4rem; }
+    button { background: var(--brand); color: #fff; border: 0; cursor: pointer; margin: 0 .3rem .3rem 0; }
+    button.secondary { background: #e9e7ff; color: var(--brand); }
+    ul { padding-left: 1.1rem; margin: .3rem 0; }
+    .row { display: flex; gap: .4rem; } .row > * { flex: 1; }
+    .muted { color: #6b7194; font-size: .88rem; }
+    .ok { color: var(--ok); font-weight: 600; } .bad { color: var(--bad); font-weight: 600; }
+    #chat { max-height: 220px; overflow: auto; border: 1px solid var(--line); border-radius: .4rem; padding: .5rem; margin-bottom: .5rem; }
+    #chat p { margin: .3rem 0; } .student { color: var(--brand); }
+    #log { grid-column: 1 / -1; white-space: pre-wrap; font: .8rem/1.4 ui-monospace, monospace; background: #14162b; color: #d9dcff; border-radius: .7rem; padding: 1rem; max-height: 320px; overflow: auto; margin: 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EduLab AI — banc d'essai</h1>
+    <span id="net"></span>
+    <span id="who" class="muted" style="color:#fff"></span>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Compte</h2>
+      <input id="email" type="email" placeholder="email (ex. eleve1@gmail.com)">
+      <input id="password" type="password" placeholder="mot de passe (6 caractères minimum)">
+      <input id="fullName" placeholder="nom complet">
+      <select id="role"><option value="student">Élève</option><option value="teacher">Enseignant</option></select>
+      <button id="btnSignUp">S'inscrire</button>
+      <button id="btnSignIn" class="secondary">Se connecter</button>
+      <button id="btnSignOut" class="secondary">Se déconnecter</button>
+    </section>
+
+    <section>
+      <h2>2. Synchronisation et données locales</h2>
+      <p id="syncState" class="muted"></p>
+      <p id="localState" class="muted"></p>
+      <button id="btnSync">Synchroniser maintenant</button>
+      <button id="btnForce" class="secondary">Retélécharger le contenu</button>
+    </section>
+
+    <section>
+      <h2>3. Catalogue (lu depuis la base locale)</h2>
+      <button id="btnCatalog">Afficher le catalogue</button>
+      <div id="catalog" class="muted">Connecte-toi puis synchronise.</div>
+    </section>
+
+    <section>
+      <h2>4. Faire un exercice</h2>
+      <div id="exercise" class="muted">Choisis un exercice dans le catalogue.</div>
+    </section>
+
+    <section>
+      <h2>5. Assistant</h2>
+      <div id="chat"></div>
+      <select id="hint"><option value="1">Indice 1 (relance)</option><option value="2">Indice 2 (méthode)</option><option value="3">Indice 3 (étapes)</option></select>
+      <input id="question" placeholder="Pose ta question (ex. Pourquoi la solution est devenue rose ?)">
+      <button id="btnAsk">Demander</button>
+    </section>
+
+    <section>
+      <h2>6. Classes</h2>
+      <p class="muted"><b>Enseignant :</b></p>
+      <input id="className" placeholder="nom de la classe (ex. Seconde C)">
+      <button id="btnCreateClass">Créer la classe</button>
+      <button id="btnListClasses" class="secondary">Mes classes</button>
+      <p class="muted"><b>Élève :</b></p>
+      <input id="joinCode" placeholder="code de la classe (6 caractères)">
+      <button id="btnJoin">Rejoindre</button>
+      <p class="muted"><b>Enseignant :</b> progression</p>
+      <input id="classId" placeholder="identifiant de la classe (copié depuis « Mes classes »)">
+      <button id="btnProgress">Voir la progression</button>
+      <div id="progress"></div>
+    </section>
+
+    <pre id="log"></pre>
+  </main>
+
+  <script type="module" src="/playground/main.js"></script>
+</body>
+</html>
