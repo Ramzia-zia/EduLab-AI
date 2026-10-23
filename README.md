@@ -1,4 +1,4 @@
-# EduLab AI — Partie 3 : backend, IA et mode hors ligne
+# EduLab AI  : backend, IA et mode hors ligne
 
 Ce dossier contient tout le travail de la **Personne 3** :
 
