@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Laboratoire</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="logo">🧪 EduLab AI</div>
+      <nav>
+        <a href="dashboard.html">Accueil</a>
+        <a href="simulations.html" class="active">Simulations</a>
+        <a href="cours.html">Cours & Exercices</a>
+        <a href="suivi.html">Mon suivi</a>
+        <a href="enseignant.html">Espace enseignant</a>
+        <a href="index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div style="margin-bottom: 24px;">
+        <a href="simulations.html" class="btn btn-secondary">← Retour aux simulations</a>
+      </div>
+
+      <div class="simulation-layout">
+        <div class="canvas-area" style="flex: 1.5;">
+          <canvas id="stage" width="450" height="500"></canvas>
+        </div>
+
+        <div class="control-panel">
+          <h2 style="margin-bottom: 16px;">Titrage acide-base</h2>
+          
+          <div class="card">
+            <h3>Matériel</h3>
+            <ul class="material-list">
+              <li>Burette graduée</li>
+              <li>Érienmeyer</li>
+              <li>Solution acide (HCl)</li>
+              <li>Solution basique (NaOH)</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="ph-header"><span>pH actuel</span><span id="ph-value" class="ph-value">1.00</span></div>
+            <div class="ph-header"><span>Volume versé</span><span id="volume-value" class="volume-value">0.0 mL</span></div>
+            <input type="range" id="volume-slider" min="0" max="40" step="0.1" value="0">
+          </div>
+
+          <a href="suivi.html" class="btn btn-primary btn-full" style="text-decoration: none;">Terminer l'expérience</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('volume-slider');
+    const phValueEl = document.getElementById('ph-value');
+    const volumeValueEl = document.getElementById('volume-value');
+
+    function calcPh(volume) {
+      const ca = 0.1, va = 20.0, cb = 0.1;
+      const nAcid = ca * va;
+      const nBase = cb * volume;
+      const vTot = va + volume;
+      if (Math.abs(nBase - nAcid) < 0.05) return 7.0;
+      if (nBase < nAcid) return -Math.log10((nAcid - nBase) / vTot);
+      return 14.0 + Math.log10((nBase - nAcid) / vTot);
+    }
+
+    function draw(volume, ph) {
+      ctx.clearRect(0, 0, 450, 500);
+      
+      // Burette
+      ctx.fillStyle = 'rgba(230, 235, 245, 0.8)'; 
+      ctx.fillRect(200, 20, 40, 200);
+      ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 2; ctx.strokeRect(200, 20, 40, 200);
+      
+      // Robinet
+      ctx.fillStyle = '#6D28D9'; ctx.fillRect(210, 220, 20, 15);
+      
+      // Goutte
+      if (volume > 0 && volume < 40) {
+        ctx.fillStyle = '#6D28D9';
+        ctx.beginPath(); ctx.ellipse(220, 255, 5, 10, 0, 0, Math.PI * 2); ctx.fill();
+      }
+
+      // Bécher
+      ctx.beginPath();
+      ctx.moveTo(170, 320); ctx.lineTo(270, 320); ctx.lineTo(230, 460); ctx.lineTo(210, 460); ctx.closePath();
+      
+      let color = 'rgba(241, 245, 249, 0.6)';
+      if (ph >= 8.2 && ph <= 10) color = 'rgba(236, 72, 153, 0.4)';
+      if (ph > 10) color = 'rgba(236, 72, 153, 0.85)';
+      
+      ctx.fillStyle = color; ctx.fill();
+      ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 3; ctx.stroke();
+
+      // Courbe
+      ctx.beginPath();
+      ctx.strokeStyle = '#5B35D5'; ctx.lineWidth = 2;
+      for (let i = 0; i <= volume; i += 0.5) {
+        const p = calcPh(i);
+        const x = 280 + (i / 40) * 150;
+        const y = 480 - (p / 14) * 150;
+        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+      }
+      ctx.stroke();
+    }
+
+    slider.addEventListener('input', () => {
+      const volume = parseFloat(slider.value);
+      const ph = calcPh(volume);
+      phValueEl.textContent = ph.toFixed(2);
+      volumeValueEl.textContent = volume.toFixed(1) + ' mL';
+      draw(volume, ph);
+    });
+
+    draw(0, calcPh(0));
+  </script>
+</body>
+</html>

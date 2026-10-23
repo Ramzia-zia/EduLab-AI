@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduLab AI - Connexion</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="logo" style="justify-content: center; margin-bottom: 24px;">🧪 EduLab AI</div>
+      <h2>Connexion</h2>
+      <p style="text-align: center; color: #666; margin-bottom: 24px; font-size: 0.9rem;">Accédez à votre espace d'apprentissage</p>
+      
+      <div class="form-group">
+        <label>Adresse e-mail</label>
+        <input type="email" id="email" placeholder="exemple@email.com">
+      </div>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" id="pass" placeholder="Votre mot de passe">
+      </div>
+      
+      <button class="btn btn-primary btn-full" id="btn-login" style="margin-top: 16px;">Se connecter</button>
+      
+      <p style="text-align: center; margin-top: 24px; font-size: 0.9rem;">
+        Vous n'avez pas de compte ? <a href="register.html" style="color: var(--violet); text-decoration: none; font-weight: 600;">Inscrivez-vous</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Script pour gérer la connexion -->
+  <script type="module">
+    import { api } from './js/api.js';
+
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const pass = document.getElementById('pass').value;
+
+      if (!email || !pass) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      const btn = document.getElementById('btn-login');
+      btn.textContent = "Connexion en cours...";
+      
+      try {
+        // Appel à l'API (qui est en mode mock pour l'instant)
+        await api.login(email, pass);
+        // Redirection vers le tableau de bord
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        alert("Erreur de connexion : " + error.message);
+        btn.textContent = "Se connecter";
+      }
+    });
+  </script>
+</body>
+</html>

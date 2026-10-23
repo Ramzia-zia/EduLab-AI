@@ -1,0 +1,80 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduLab AI - Connexion</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <div class="logo" style="justify-content: center; margin-bottom: 32px;">🧪 EduLab AI</div>
+      <h2>Connexion</h2>
+      <p style="text-align: center; color: #64748B; margin-bottom: 32px; font-size: 0.95rem;">Accédez à votre espace d'apprentissage</p>
+      
+      <!-- Sélecteur Élève / Enseignant -->
+      <div style="display: flex; background: var(--fond-clair); border-radius: 8px; padding: 4px; margin-bottom: 24px;">
+        <button style="flex: 1; padding: 10px; border: none; background: white; border-radius: 6px; font-weight: 600; color: var(--violet); box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer;">Élève</button>
+        <button style="flex: 1; padding: 10px; border: none; background: transparent; border-radius: 6px; font-weight: 600; color: #64748B; cursor: pointer;">Enseignant</button>
+      </div>
+
+      <div class="form-group">
+        <label>Adresse e-mail</label>
+        <input type="email" id="email" placeholder="exemple@email.com">
+      </div>
+      <div class="form-group">
+        <label>Mot de passe</label>
+        <input type="password" id="pass" placeholder="Votre mot de passe">
+      </div>
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.85rem; color: #64748B;">
+        <label><input type="checkbox"> Se souvenir de moi</label>
+        <a href="#" style="color: var(--violet); text-decoration: none; font-weight: 600;">Mot de passe oublié ?</a>
+      </div>
+
+      <button class="btn btn-primary btn-full" id="btn-login">Se connecter</button>
+      
+      <div style="text-align: center; color: #94A3B8; font-size: 0.85rem; margin: 24px 0; position: relative;">
+        <span style="background: white; padding: 0 12px; position: relative; z-index: 1;">Ou se connecter avec</span>
+        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--gris-clair); z-index: 0;"></div>
+      </div>
+      
+      <button class="btn btn-secondary btn-full" style="gap: 8px;">
+        <span style="color: #DB4437;">G</span> Se connecter avec Google
+      </button>
+
+      <p style="text-align: center; margin-top: 32px; font-size: 0.9rem; color: #64748B;">
+        Vous n'avez pas de compte ? <a href="register.html" style="color: var(--violet); text-decoration: none; font-weight: 600;">Inscrivez-vous</a>
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { api } from './js/api.js';
+
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      const email = document.getElementById('email').value;
+      const pass = document.getElementById('pass').value;
+
+      if (!email || !pass) {
+        alert("Veuillez remplir tous les champs.");
+        return;
+      }
+
+      const btn = document.getElementById('btn-login');
+      btn.textContent = "Connexion en cours...";
+      btn.disabled = true;
+      
+      try {
+        await api.login(email, pass);
+        window.location.href = "dashboard.html";
+      } catch (error) {
+        alert("Erreur de connexion.");
+        btn.textContent = "Se connecter";
+        btn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

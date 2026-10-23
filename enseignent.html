@@ -1,0 +1,65 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Espace Enseignant</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="logo">🧪 EduLab AI</div>
+      <nav>
+        <a href="dashboard.html">Accueil</a>
+        <a href="simulations.html">Simulations</a>
+        <a href="cours.html">Cours & Exercices</a>
+        <a href="suivi.html">Mon suivi</a>
+        <a href="enseignant.html" class="active">Espace enseignant</a>
+        <a href="index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Espace enseignant</h1>
+        <p>Bienvenue, Professeur. Voici un résumé de vos classes.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card"><div class="big-stat">2</div><p class="stat-label">Classes actives</p></div>
+        <div class="card"><div class="big-stat">48</div><p class="stat-label">Élèves au total</p></div>
+        <div class="card"><div class="big-stat" style="color: var(--danger);">8</div><p class="stat-label">En difficulté</p></div>
+      </div>
+
+      <div class="card" style="margin-top: 32px;">
+        <h3>Progression de la classe</h3>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.95rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--gris-clair); text-align: left; color: #64748B;">
+              <th style="padding: 16px 12px;">Élève</th>
+              <th style="padding: 16px 12px;">Matière</th>
+              <th style="padding: 16px 12px;">Progression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--gris-clair);">
+              <td style="padding: 16px 12px; font-weight: 500;">Adjo K.</td>
+              <td style="padding: 16px 12px;">Physique</td>
+              <td style="padding: 16px 12px; width: 30%;">
+                <div style="background: var(--gris-clair); height: 8px; border-radius: 4px; width: 100%;"><div style="background: var(--succes); height: 8px; border-radius: 4px; width: 70%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 12px; font-weight: 500;">Kouassi M.</td>
+              <td style="padding: 16px 12px;">Chimie</td>
+              <td style="padding: 16px 12px; width: 30%;">
+                <div style="background: var(--gris-clair); height: 8px; border-radius: 4px; width: 100%;"><div style="background: #F59E0B; height: 8px; border-radius: 4px; width: 45%;"></div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
