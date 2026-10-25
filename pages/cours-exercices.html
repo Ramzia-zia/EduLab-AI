@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Cours</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --violet: #5B35D5; --violet-fonce: #302078; --violet-clair: #F3E8FF; --blanc: #FFFFFF; --fond: #F7F7FC; --texte: #17163D; --texte-gris: #64748B; --bordure: #E8E8F2; --succes: #10B981; --danger: #EF4444; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--fond); color: var(--texte); }
+    a { text-decoration: none; color: inherit; }
+    .app-layout { display: flex; min-height: 100vh; }
+    .sidebar { width: 260px; background: white; border-right: 1px solid var(--bordure); padding: 24px; display: flex; flex-direction: column; position: fixed; height: 100vh; }
+    .sidebar .logo { font-size: 1.3rem; font-weight: 800; color: var(--violet); margin-bottom: 40px; }
+    .sidebar nav { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .sidebar a { color: var(--texte-gris); padding: 12px 16px; border-radius: 10px; font-weight: 500; font-size: 0.95rem; }
+    .sidebar a:hover { background: var(--fond); color: var(--texte); }
+    .sidebar a.active { background: var(--violet-clair); color: var(--violet); font-weight: 600; }
+    .main-content { flex: 1; margin-left: 260px; padding: 40px; }
+    .page-header { margin-bottom: 32px; }
+    .page-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
+    .page-header p { color: var(--texte-gris); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; display: inline-flex; }
+    .btn-primary { background: var(--violet); color: white; }
+    .btn-primary:hover { background: var(--violet-fonce); }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="logo">🧪 EduLab AI</div>
+      <nav>
+        <a href="tableau-bord.html">Accueil</a>
+        <a href="simulations.html">Simulations</a>
+        <a href="cours-exercices.html" class="active">Cours & Exercices</a>
+        <a href="progression.html">Mon suivi</a>
+        <a href="assistant-ia.html">Assistant IA</a>
+        <a href="espace-enseignant.html">Espace enseignant</a>
+        <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div class="page-header">
+        <h1>Cours & Exercices</h1>
+        <p>Révise tes matières</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Les réactions chimiques</h3>
+          <p style="color: var(--texte-gris); margin: 12px 0;">Découvre les différents types de réactions et leurs caractéristiques.</p>
+          <button class="btn btn-primary">Lire le cours</button>
+        </div>
+        <div class="card">
+          <h3>Exercices recommandés</h3>
+          <ul style="margin-top: 16px; margin-left: 20px; color: var(--texte-gris); line-height: 2;">
+            <li>Équilibrer une équation chimique (10 min)</li>
+            <li>Identifier un gaz (15 min)</li>
+            <li>Titrage acide-base (20 min)</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

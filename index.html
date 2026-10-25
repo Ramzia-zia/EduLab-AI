@@ -1,80 +1,63 @@
- <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EduLab AI - Connexion</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>EduLab AI</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    :root {
+      --violet: #5B35D5; --violet-fonce: #302078; --violet-clair: #F3E8FF;
+      --blanc: #FFFFFF; --fond: #F7F7FC; --texte: #17163D;
+      --texte-gris: #64748B; --bordure: #E8E8F2; --succes: #10B981; --danger: #EF4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--fond); color: var(--texte); line-height: 1.5; }
+    a { text-decoration: none; color: inherit; }
+    .btn { padding: 12px 24px; border-radius: 10px; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; display: inline-flex; align-items: center; justify-content: center; border: none; cursor: pointer; }
+    .btn-primary { background: var(--violet); color: white; box-shadow: 0 4px 12px rgba(91, 53, 213, 0.2); }
+    .btn-primary:hover { background: var(--violet-fonce); transform: translateY(-1px); }
+    .btn-secondary { background: white; color: var(--texte); border: 1px solid var(--bordure); }
+    .btn-secondary:hover { background: var(--fond); }
+    .landing-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 48px; border-bottom: 1px solid var(--bordure); background: white; }
+    .hero { display: flex; align-items: center; justify-content: space-between; padding: 80px 48px; max-width: 1200px; margin: 0 auto; gap: 60px; }
+    .hero h1 { font-size: 3rem; color: var(--violet-fonce); margin-bottom: 24px; line-height: 1.1; }
+    .hero p { font-size: 1.1rem; color: var(--texte-gris); margin-bottom: 40px; }
+    .features { padding: 40px 48px 80px; background: var(--fond); }
+    .features-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
+    .card { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid var(--bordure); }
+    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+  </style>
 </head>
-<body>
-  <div class="auth-container">
-    <div class="auth-card">
-      <div class="logo" style="justify-content: center; margin-bottom: 32px;">🧪 EduLab AI</div>
-      <h2>Connexion</h2>
-      <p style="text-align: center; color: #64748B; margin-bottom: 32px; font-size: 0.95rem;">Accédez à votre espace d'apprentissage</p>
-      
-      <!-- Sélecteur Élève / Enseignant -->
-      <div style="display: flex; background: var(--fond-clair); border-radius: 8px; padding: 4px; margin-bottom: 24px;">
-        <button style="flex: 1; padding: 10px; border: none; background: white; border-radius: 6px; font-weight: 600; color: var(--violet); box-shadow: 0 1px 3px rgba(0,0,0,0.1); cursor: pointer;">Élève</button>
-        <button style="flex: 1; padding: 10px; border: none; background: transparent; border-radius: 6px; font-weight: 600; color: #64748B; cursor: pointer;">Enseignant</button>
+<body style="background: white;">
+  <header class="landing-header">
+    <div style="font-size: 1.3rem; font-weight: 800; color: var(--violet);">🧪 EduLab AI</div>
+    <nav style="display: flex; gap: 32px;">
+      <a href="index.html" style="font-weight: 600;">Accueil</a>
+      <a href="#" style="color: var(--texte-gris);">À propos</a>
+      <a href="#" style="color: var(--texte-gris);">Fonctionnalités</a>
+      <a href="#" style="color: var(--texte-gris);">Contact</a>
+    </nav>
+    <a href="pages/connexion.html" class="btn btn-primary">Se connecter</a>
+  </header>
+  <section class="hero">
+    <div style="flex: 1;">
+      <h1>Apprendre en pratiquant, même sans laboratoire et sans Internet</h1>
+      <p>EduLab AI est une plateforme de laboratoires virtuels intelligents pour l'enseignement secondaire au Togo.</p>
+      <div style="display: flex; gap: 16px;">
+        <a href="pages/inscription.html" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.1rem;">Commencer maintenant →</a>
+        <a href="pages/connexion.html" class="btn btn-secondary" style="padding: 16px 32px; font-size: 1.1rem;">Découvrir</a>
       </div>
-
-      <div class="form-group">
-        <label>Adresse e-mail</label>
-        <input type="email" id="email" placeholder="exemple@email.com">
-      </div>
-      <div class="form-group">
-        <label>Mot de passe</label>
-        <input type="password" id="pass" placeholder="Votre mot de passe">
-      </div>
-      
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.85rem; color: #64748B;">
-        <label><input type="checkbox"> Se souvenir de moi</label>
-        <a href="#" style="color: var(--violet); text-decoration: none; font-weight: 600;">Mot de passe oublié ?</a>
-      </div>
-
-      <button class="btn btn-primary btn-full" id="btn-login">Se connecter</button>
-      
-      <div style="text-align: center; color: #94A3B8; font-size: 0.85rem; margin: 24px 0; position: relative;">
-        <span style="background: white; padding: 0 12px; position: relative; z-index: 1;">Ou se connecter avec</span>
-        <div style="position: absolute; top: 50%; left: 0; right: 0; height: 1px; background: var(--gris-clair); z-index: 0;"></div>
-      </div>
-      
-      <button class="btn btn-secondary btn-full" style="gap: 8px;">
-        <span style="color: #DB4437;">G</span> Se connecter avec Google
-      </button>
-
-      <p style="text-align: center; margin-top: 32px; font-size: 0.9rem; color: #64748B;">
-        Vous n'avez pas de compte ? <a href="register.html" style="color: var(--violet); text-decoration: none; font-weight: 600;">Inscrivez-vous</a>
-      </p>
     </div>
-  </div>
-
-  <script type="module">
-    import { api } from './js/api.js';
-
-    document.getElementById('btn-login').addEventListener('click', async () => {
-      const email = document.getElementById('email').value;
-      const pass = document.getElementById('pass').value;
-
-      if (!email || !pass) {
-        alert("Veuillez remplir tous les champs.");
-        return;
-      }
-
-      const btn = document.getElementById('btn-login');
-      btn.textContent = "Connexion en cours...";
-      btn.disabled = true;
-      
-      try {
-        await api.login(email, pass);
-        window.location.href = "dashboard.html";
-      } catch (error) {
-        alert("Erreur de connexion.");
-        btn.textContent = "Se connecter";
-        btn.disabled = false;
-      }
-    });
-  </script>
+    <div style="flex: 1; text-align: center; font-size: 10rem;">👩🏾‍🔬</div>
+  </section>
+  <section class="features">
+    <div class="features-grid">
+      <div class="card"><div style="font-size: 2.5rem; margin-bottom: 16px;">🧪</div><h3>Simulations interactives</h3><p style="font-size: 0.9rem; color: var(--texte-gris);">Manipulez des instruments virtuels.</p></div>
+      <div class="card"><div style="font-size: 2.5rem; margin-bottom: 16px;">🤖</div><h3>Assistant IA</h3><p style="font-size: 0.9rem; color: var(--texte-gris);">Une IA qui vous aide à progresser.</p></div>
+      <div class="card"><div style="font-size: 2.5rem; margin-bottom: 16px;">📶</div><h3>Sans internet</h3><p style="font-size: 0.9rem; color: var(--texte-gris);">Fonctionne hors ligne.</p></div>
+      <div class="card"><div style="font-size: 2.5rem; margin-bottom: 16px;">📱</div><h3>Multi-appareils</h3><p style="font-size: 0.9rem; color: var(--texte-gris);">PC, tablette et mobile.</p></div>
+    </div>
+  </section>
 </body>
 </html>
