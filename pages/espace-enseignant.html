@@ -1,28 +1,21 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>EduLab AI - Enseignant</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>EduLab AI - Espace Enseignant</title>
+  <link rel="stylesheet" href="../css/style.css">
   <style>
-    :root { --violet: #5B35D5; --violet-fonce: #302078; --violet-clair: #F3E8FF; --blanc: #FFFFFF; --fond: #F7F7FC; --texte: #17163D; --texte-gris: #64748B; --bordure: #E8E8F2; --succes: #10B981; --danger: #EF4444; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Inter', sans-serif; background: var(--fond); color: var(--texte); }
-    a { text-decoration: none; color: inherit; }
-    .app-layout { display: flex; min-height: 100vh; }
-    .sidebar { width: 260px; background: white; border-right: 1px solid var(--bordure); padding: 24px; display: flex; flex-direction: column; position: fixed; height: 100vh; }
-    .sidebar .logo { font-size: 1.3rem; font-weight: 800; color: var(--violet); margin-bottom: 40px; }
-    .sidebar nav { display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .sidebar a { color: var(--texte-gris); padding: 12px 16px; border-radius: 10px; font-weight: 500; font-size: 0.95rem; }
-    .sidebar a:hover { background: var(--fond); color: var(--texte); }
-    .sidebar a.active { background: var(--violet-clair); color: var(--violet); font-weight: 600; }
-    .main-content { flex: 1; margin-left: 260px; padding: 40px; }
-    .page-header { margin-bottom: 32px; }
-    .page-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 8px; }
-    .page-header p { color: var(--texte-gris); }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
-    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+    .stat-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); display: flex; flex-direction: column; }
+    .stat-card .value { font-size: 2rem; font-weight: 800; color: var(--violet); margin-bottom: 4px; }
+    .stat-card .label { color: var(--texte-gris); font-size: 0.9rem; font-weight: 500; }
+    
+    .table-container { background: white; border-radius: 16px; border: 1px solid var(--bordure); overflow: hidden; margin-top: 32px; }
+    .table-header { background: var(--fond); padding: 16px 24px; display: grid; grid-template-columns: 2fr 1fr 2fr 1fr; font-weight: 600; color: var(--texte-gris); font-size: 0.9rem; }
+    .table-row { padding: 16px 24px; display: grid; grid-template-columns: 2fr 1fr 2fr 1fr; align-items: center; border-top: 1px solid var(--bordure); }
+    .student-name { font-weight: 600; font-size: 0.95rem; }
+    .progress-bar { height: 8px; background: var(--bordure); border-radius: 4px; overflow: hidden; width: 100%; }
+    .progress-fill { height: 100%; border-radius: 4px; }
+    .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
   </style>
 </head>
 <body>
@@ -35,33 +28,95 @@
         <a href="cours-exercices.html">Cours & Exercices</a>
         <a href="progression.html">Mon suivi</a>
         <a href="assistant-ia.html">Assistant IA</a>
+        <a href="communaute.html">Communauté</a>
+        <a href="parametres.html">Paramètres</a>
         <a href="espace-enseignant.html" class="active">Espace enseignant</a>
         <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
       </nav>
     </aside>
-    <main class="main-content">
-      <div class="page-header">
-        <h1>Espace enseignant</h1>
-        <p>Vue globale de vos classes</p>
+
+    <main class="main-content" style="background: #F8F9FA;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+        <div>
+          <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">Espace enseignant</h1>
+          <p style="color: var(--texte-gris); font-size: 1rem;">Bonjour Professeur Koffi, voici un résumé de vos classes.</p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary">Exporter les notes</button>
+          <button class="btn btn-primary">+ Nouvelle activité</button>
+        </div>
       </div>
-      <div class="grid-3">
-        <div class="card"><div style="font-size: 2rem; font-weight: 800; color: var(--violet);">2</div><p style="color: var(--texte-gris);">Classes actives</p></div>
-        <div class="card"><div style="font-size: 2rem; font-weight: 800; color: var(--violet);">48</div><p style="color: var(--texte-gris);">Élèves au total</p></div>
-        <div class="card"><div style="font-size: 2rem; font-weight: 800; color: var(--danger);">8</div><p style="color: var(--texte-gris);">En difficulté</p></div>
+
+      <!-- Statistiques globales -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <div class="stat-card">
+          <div class="value">2</div>
+          <div class="label">Classes actives</div>
+        </div>
+        <div class="stat-card">
+          <div class="value">48</div>
+          <div class="label">Élèves au total</div>
+        </div>
+        <div class="stat-card">
+          <div class="value" style="color: var(--danger);">8</div>
+          <div class="label">Élèves en difficulté</div>
+        </div>
       </div>
-      <div class="card" style="margin-top: 32px;">
-        <h3>Progression de la classe</h3>
-        <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-          <tr style="border-bottom: 1px solid var(--bordure); text-align: left; color: var(--texte-gris);">
-            <th style="padding: 12px;">Élève</th><th style="padding: 12px;">Matière</th><th style="padding: 12px;">Progression</th>
-          </tr>
-          <tr style="border-bottom: 1px solid var(--bordure);">
-            <td style="padding: 12px;">Adjo K.</td><td style="padding: 12px;">Physique</td><td style="padding: 12px;">70%</td>
-          </tr>
-          <tr>
-            <td style="padding: 12px;">Kouassi M.</td><td style="padding: 12px;">Chimie</td><td style="padding: 12px;">45%</td>
-          </tr>
-        </table>
+
+      <!-- Tableau de progression -->
+      <h2 style="font-size: 1.2rem; font-weight: 700; margin-top: 40px; margin-bottom: 16px;">Progression de la classe</h2>
+      
+      <div class="table-container">
+        <div class="table-header">
+          <div>Élève</div>
+          <div>Matière</div>
+          <div>Progression</div>
+          <div>Statut</div>
+        </div>
+        
+        <!-- Élève 1 -->
+        <div class="table-row">
+          <div class="student-name">Adjo K.</div>
+          <div style="color: var(--texte-gris); font-size: 0.9rem;">Physique</div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="progress-bar"><div class="progress-fill" style="width: 70%; background: var(--succes);"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 600;">70%</span>
+          </div>
+          <div><span class="status-dot" style="background: var(--succes);"></span> Bon</div>
+        </div>
+
+        <!-- Élève 2 -->
+        <div class="table-row">
+          <div class="student-name">Kouassi M.</div>
+          <div style="color: var(--texte-gris); font-size: 0.9rem;">Chimie</div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="progress-bar"><div class="progress-fill" style="width: 45%; background: #F59E0B;"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 600;">45%</span>
+          </div>
+          <div><span class="status-dot" style="background: #F59E0B;"></span> Moyen</div>
+        </div>
+
+        <!-- Élève 3 -->
+        <div class="table-row">
+          <div class="student-name">Essi L.</div>
+          <div style="color: var(--texte-gris); font-size: 0.9rem;">SVT</div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="progress-bar"><div class="progress-fill" style="width: 85%; background: var(--succes);"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 600;">85%</span>
+          </div>
+          <div><span class="status-dot" style="background: var(--succes);"></span> Très bien</div>
+        </div>
+
+        <!-- Élève 4 -->
+        <div class="table-row">
+          <div class="student-name">Togola D.</div>
+          <div style="color: var(--texte-gris); font-size: 0.9rem;">Maths</div>
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="progress-bar"><div class="progress-fill" style="width: 30%; background: var(--danger);"></div></div>
+            <span style="font-size: 0.85rem; font-weight: 600;">30%</span>
+          </div>
+          <div><span class="status-dot" style="background: var(--danger);"></span> Difficile</div>
+        </div>
       </div>
     </main>
   </div>

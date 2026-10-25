@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Simulation</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lab-grid { display: grid; grid-template-columns: 240px 1fr 300px; gap: 24px; align-items: start; }
+    .lab-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); }
+    .lab-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .step-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 500; }
+    .step-num { width: 24px; height: 24px; background: var(--violet); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+    .material-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 500; color: var(--texte-gris); }
+    .material-icon { font-size: 1.2rem; width: 24px; text-align: center; }
+    input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; height: 6px; border-radius: 3px; background: var(--bordure); -webkit-appearance: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--violet); cursor: pointer; box-shadow: 0 2px 6px rgba(91,53,213,0.3); }
+    .canvas-container { background: #E2E8F0; border-radius: 16px; padding: 20px; display: flex; justify-content: center; align-items: center; aspect-ratio: 1; }
+    .ph-gradient { height: 12px; border-radius: 6px; background: linear-gradient(to right, #EF4444, #F59E0B, #10B981, #3B82F6, #6D28D9); margin-top: 8px; position: relative; }
+  </style>
+</head>
+<body>
+  <div style="min-height: 100vh; background: #F8F9FA; display: flex; flex-direction: column;">
+    <!-- Header simple -->
+    <header style="background: white; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--bordure);">
+      <div style="display: flex; align-items: center; gap: 24px;">
+        <a href="simulations.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">← Retour</a>
+        <h1 style="font-size: 1.2rem; font-weight: 700;">Titrage acido-basique</h1>
+      </div>
+      <div style="width: 36px; height: 36px; background: var(--violet-clair); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--violet);">👤</div>
+    </header>
+
+    <!-- Contenu du Labo -->
+    <main style="flex: 1; padding: 32px; display: flex; justify-content: center;">
+      <div class="lab-grid" style="width: 100%; max-width: 1200px;">
+        
+        <!-- Colonne de gauche : Matériel -->
+        <div class="lab-card">
+          <div class="lab-title">Matériel</div>
+          <div class="material-item"><span class="material-icon">💧</span> Burette</div>
+          <div class="material-item"><span class="material-icon">🧪</span> Erlenmeyer</div>
+          <div class="material-item"><span class="material-icon">🧴</span> Solution acide</div>
+          <div class="material-item"><span class="material-icon">🧴</span> Solution basique</div>
+          <div class="material-item"><span class="material-icon">🎨</span> Indicateur coloré</div>
+        </div>
+
+        <!-- Colonne du milieu : Le Canvas -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="canvas-container">
+             <div class="canvas-container" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=800&auto=format&fit=crop'); background-size: cover; background-position: center; position: relative;">
+  <div style="position: absolute; inset: 0; background: rgba(255,255,255,0.3); border-radius: 16px;"></div>
+  <canvas id="stage" width="400" height="400" style="position: relative; z-index: 1;"></canvas>
+</div>
+          </div>
+          <!-- Barre de volume en bas -->
+          <div class="lab-card" style="padding: 16px 24px;">
+            <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 0.9rem; margin-bottom: 8px;">
+              <span>Volume versé</span>
+              <span id="volume-value" style="color: var(--violet);">0.0 mL</span>
+            </div>
+            <input type="range" id="volume-slider" min="0" max="40" step="0.1" value="0">
+          </div>
+        </div>
+
+        <!-- Colonne de droite : Étapes et pH -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="lab-card">
+            <div class="lab-title">Étapes</div>
+            <div class="step-item"><span class="step-num">1</span> Ajouter la solution acide</div>
+            <div class="step-item"><span class="step-num">2</span> Ajouter l'indicateur</div>
+            <div class="step-item"><span class="step-num">3</span> Verser la solution basique</div>
+            <div class="step-item"><span class="step-num">4</span> Observer le changement de couleur</div>
+          </div>
+
+          <div class="lab-card">
+            <div style="font-weight: 700; margin-bottom: 8px; font-size: 0.9rem;">pH actuel</div>
+            <div id="ph-value" style="font-size: 1.5rem; font-weight: 700; color: var(--texte);">7.2</div>
+            <div class="ph-gradient">
+              <div id="ph-marker" style="position: absolute; top: -4px; width: 20px; height: 20px; background: white; border: 2px solid var(--texte); border-radius: 50%; transform: translateX(-50%); transition: left 0.2s;"></div>
+            </div>
+          </div>
+
+          <button onclick="window.location.href='progression.html'" class="btn btn-primary" style="width: 100%; padding: 14px; border-radius: 10px;">Continuer</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stage');
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('volume-slider');
+    const phEl = document.getElementById('ph-value');
+    const volEl = document.getElementById('volume-value');
+    const marker = document.getElementById('ph-marker');
+
+    function calcPh(v) {
+      const nA = 0.1 * 20, nB = 0.1 * v, vt = 20 + v;
+      if (Math.abs(nB - nA) < 0.05) return 7;
+      if (nB < nA) return -Math.log10((nA - nB) / vt);
+      return 14 + Math.log10((nB - nA) / vt);
+    }
+
+    function draw(volume, ph) {
+      ctx.clearRect(0, 0, 400, 400);
+      
+      // Burette
+      ctx.fillStyle = '#E2E8F0'; ctx.fillRect(185, 20, 30, 120);
+      ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 2; ctx.strokeRect(185, 20, 30, 120);
+      
+      // Robinet
+      ctx.fillStyle = '#6D28D9'; ctx.fillRect(190, 140, 20, 15);
+
+      // Erlenmeyer (Bécher triangulaire)
+      ctx.beginPath();
+      ctx.moveTo(160, 220); ctx.lineTo(240, 220);
+      ctx.lineTo(215, 350); ctx.lineTo(185, 350); ctx.closePath();
+      
+      // Couleur du liquide
+      let color = '#F8FAFC';
+      if (ph > 10) color = '#F472B6'; // Rose vif
+      else if (ph >= 8.2) color = '#FBCFE8'; // Rose clair
+      
+      ctx.fillStyle = color; ctx.fill();
+      ctx.strokeStyle = '#94A3B8'; ctx.lineWidth = 3; ctx.stroke();
+    }
+
+    slider.addEventListener('input', (e) => {
+      const v = parseFloat(e.target.value);
+      const p = calcPh(v);
+      phEl.textContent = p.toFixed(1);
+      volEl.textContent = v.toFixed(1) + ' mL';
+      
+      // Déplacer le marqueur de pH
+      const percent = (p / 14) * 100;
+      marker.style.left = percent + '%';
+      
+      draw(v, p);
+    });
+
+    draw(0, calcPh(0));
+  </script>
+</body>
+</html>

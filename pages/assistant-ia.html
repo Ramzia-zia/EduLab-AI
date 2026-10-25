@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Assistant IA</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .chat-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; height: calc(100vh - 120px); }
+    .message-row { display: flex; gap: 16px; margin-bottom: 24px; }
+    .message-row.user { flex-direction: row-reverse; }
+    .avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    .avatar.ai { background: var(--violet); color: white; }
+    .avatar.user { background: var(--violet-clair); border: 1px solid var(--violet); }
+    .bubble { padding: 16px 20px; border-radius: 16px; max-width: 75%; font-size: 0.95rem; line-height: 1.5; }
+    .bubble.ai { background: #F1F5F9; color: var(--texte); border-bottom-left-radius: 4px; }
+    .bubble.user { background: var(--violet-clair); color: var(--violet-fonce); border-bottom-right-radius: 4px; font-weight: 500; }
+    .action-chips { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+    .chip { padding: 8px 16px; border: 1px solid var(--violet); border-radius: 20px; color: var(--violet); font-size: 0.85rem; font-weight: 600; background: white; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .chip:hover { background: var(--violet-clair); }
+    .chat-input { display: flex; gap: 12px; margin-top: auto; padding-top: 24px; }
+    .chat-input input { flex: 1; padding: 16px 24px; border: 1px solid var(--bordure); border-radius: 30px; font-size: 1rem; outline: none; }
+    .chat-input button { width: 52px; height: 52px; border-radius: 50%; background: var(--violet); color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="logo">🧪 EduLab AI</div>
+      <nav>
+        <a href="tableau-bord.html">Accueil</a>
+        <a href="simulations.html">Simulations</a>
+        <a href="cours-exercices.html">Cours & Exercices</a>
+        <a href="progression.html">Mon suivi</a>
+        <a href="assistant-ia.html" class="active">Assistant IA</a>
+        <a href="communaute.html">Communauté</a>
+        <a href="parametres.html">Paramètres</a>
+        <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
+      </nav>
+    </aside>
+
+    <main class="main-content" style="background: #F8F9FA;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+        <h1 style="font-size: 1.8rem; font-weight: 700;">Assistant IA</h1>
+      </div>
+
+      <div class="chat-container">
+        <!-- Message utilisateur -->
+        <div class="message-row user">
+          <div class="avatar user">👤</div>
+          <div>
+            <div class="bubble user">Pourquoi la solution est devenue rose ?</div>
+          </div>
+        </div>
+
+        <!-- Message IA -->
+        <div class="message-row">
+          <div class="avatar ai">🧪</div>
+          <div>
+            <div class="bubble ai">
+              <strong>Bonne question !</strong><br><br>
+              Le rose indique que nous avons dépassé le point d'équivalence. L'indicateur (phénolphtaléine) change de couleur en milieu basique.<br><br>
+              Veux-tu que je t'aide à comprendre comment calculer le volume à l'équivalence ?
+            </div>
+            <div class="action-chips">
+              <div class="chip">✓ Oui, explique-moi</div>
+              <div class="chip">💡 Donner un indice</div>
+              <div class="chip">↺ Recommencer l'expérience</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barre de saisie -->
+        <div class="chat-input">
+          <input type="text" placeholder="Écris ton message...">
+          <button>➤</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

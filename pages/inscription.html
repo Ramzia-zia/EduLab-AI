@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Inscription</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body style="background: #F8F9FA;">
+  <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
+    <div class="card" style="width: 100%; max-width: 440px; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+      
+      <!-- Flèche retour -->
+      <a href="connexion.html" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--fond); border-radius: 50%; color: var(--texte); font-size: 1.2rem; margin-bottom: 16px;">←</a>
+
+      <div style="text-align: center; margin-bottom: 24px;">
+        <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--texte);">Créer un compte</h1>
+        <p style="color: var(--texte-gris); font-size: 0.9rem; margin-top: 8px;">Rejoignez EduLab AI et commencez votre parcours</p>
+      </div>
+
+      <div class="tabs" style="display: flex; background: #F1F5F9; padding: 4px; border-radius: 10px; margin-bottom: 24px;">
+        <div style="flex: 1; padding: 10px; text-align: center; background: var(--violet-clair); color: var(--violet); border-radius: 8px; font-weight: 600; font-size: 0.9rem;">Élève</div>
+        <div style="flex: 1; padding: 10px; text-align: center; color: var(--texte-gris); font-weight: 600; font-size: 0.9rem;">Enseignant</div>
+      </div>
+
+      <form action="tableau-bord.html">
+        <div class="form-group">
+          <label>Adresse e-mail</label>
+          <input type="email" placeholder="exemple@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <div style="position: relative;">
+            <input type="password" placeholder="Votre mot de passe" required style="padding-right: 40px;">
+            <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--texte-gris); cursor: pointer;">👁️</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Confirmer le mot de passe</label>
+          <div style="position: relative;">
+            <input type="password" placeholder="Confirmer votre mot de passe" required style="padding-right: 40px;">
+            <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--texte-gris); cursor: pointer;">👁️</span>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" style="padding: 14px; font-size: 1rem; border-radius: 10px; margin-top: 8px;">S'inscrire</button>
+      </form>
+
+      <p style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--texte-gris);">
+        Vous avez déjà un compte ? <a href="connexion.html" style="color: var(--violet); font-weight: 600;">Se connecter</a>
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,30 +1,56 @@
-﻿<!DOCTYPE html>
+﻿ <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <title>EduLab AI - Connexion</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-  <div class="auth-container">
-    <div class="auth-card">
-      <div style="text-align: center; font-size: 1.5rem; font-weight: 800; color: var(--violet); margin-bottom: 24px;">🧪 EduLab AI</div>
-      <h2>Connexion</h2>
-      <div class="tabs">
-        <div class="tab active">Élève</div>
-        <div class="tab">Enseignant</div>
+<body style="background: #F8F9FA;">
+  <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
+    <div class="card" style="width: 100%; max-width: 440px; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
+      <div style="text-align: center; margin-bottom: 24px;">
+        <div style="font-size: 2rem; margin-bottom: 8px;">🧪</div>
+        <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--texte);">EduLab AI</h1>
+        <h2 style="font-size: 1.3rem; margin-top: 16px;">Connexion</h2>
+        <p style="color: var(--texte-gris); font-size: 0.9rem;">Accédez à votre espace d'apprentissage</p>
       </div>
+
+      <div class="tabs" style="display: flex; background: #F1F5F9; padding: 4px; border-radius: 10px; margin-bottom: 24px;">
+        <div style="flex: 1; padding: 10px; text-align: center; background: var(--violet); color: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">👤 Élève</div>
+        <div style="flex: 1; padding: 10px; text-align: center; color: var(--texte-gris); font-weight: 600; font-size: 0.9rem;">Enseignant</div>
+      </div>
+
       <form action="tableau-bord.html">
-        <div class="form-group"><label>Adresse e-mail</label><input type="email" placeholder="exemple@email.com" required></div>
-        <div class="form-group"><label>Mot de passe</label><input type="password" placeholder="Votre mot de passe" required></div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.85rem; color: var(--texte-gris);">
-          <label><input type="checkbox"> Se souvenir de moi</label>
+        <div class="form-group">
+          <label>Adresse e-mail</label>
+          <input type="email" placeholder="exemple@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" placeholder="Votre mot de passe" required>
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.85rem;">
+          <label style="display: flex; align-items: center; gap: 8px; color: var(--texte-gris); font-weight: 500;">
+            <input type="checkbox" style="width: auto;"> Se souvenir de moi
+          </label>
           <a href="#" style="color: var(--violet); font-weight: 600;">Mot de passe oublié ?</a>
         </div>
-        <button type="submit" class="btn btn-primary btn-full">Se connecter</button>
+
+        <button type="submit" class="btn btn-primary btn-full" style="padding: 14px; font-size: 1rem; border-radius: 10px;">Se connecter</button>
       </form>
+
+      <div style="text-align: center; margin: 24px 0; color: var(--texte-gris); font-size: 0.85rem;">
+        <span style="background: #F8F9FA; padding: 0 10px; position: relative; z-index: 1;">Ou se connecter avec</span>
+        <div style="border-top: 1px solid var(--bordure); margin-top: -10px;"></div>
+      </div>
+
+      <button class="btn btn-secondary btn-full" style="display: flex; justify-content: center; gap: 8px; padding: 12px;">
+        <span style="color: #DB4437; font-weight: bold; font-size: 1.2rem;">G</span> Se connecter avec Google
+      </button>
+
       <p style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--texte-gris);">
-        Pas de compte ? <a href="inscription.html" style="color: var(--violet); font-weight: 600;">Inscrivez-vous</a>
+        Vous n'avez pas de compte ? <a href="inscription.html" style="color: var(--violet); font-weight: 600;">Inscrivez-vous</a>
       </p>
     </div>
   </div>

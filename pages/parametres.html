@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>EduLab AI - Paramètres</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .settings-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; }
+    .settings-info { display: flex; align-items: center; gap: 16px; }
+    .settings-icon { width: 48px; height: 48px; background: var(--fond); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
+    .settings-text h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .settings-text p { font-size: 0.85rem; color: var(--texte-gris); }
+  </style>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="logo">🧪 EduLab AI</div>
+      <nav>
+        <a href="tableau-bord.html">Accueil</a>
+        <a href="simulations.html">Simulations</a>
+        <a href="cours-exercices.html">Cours & Exercices</a>
+        <a href="progression.html">Mon suivi</a>
+        <a href="assistant-ia.html">Assistant IA</a>
+        <a href="communaute.html">Communauté</a>
+        <a href="parametres.html" class="active">Paramètres</a>
+        <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
+      </nav>
+    </aside>
+
+    <main class="main-content" style="background: #F8F9FA; max-width: 800px;">
+      <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 32px;">Paramètres</h1>
+
+      <!-- Profil -->
+      <div class="settings-card">
+        <div class="settings-info">
+          <div class="settings-icon" style="background: var(--violet-clair);">👤</div>
+          <div class="settings-text">
+            <h3>Profil</h3>
+            <p>Aminata D. • Élève • Seconde</p>
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="font-size: 0.9rem;">Modifier</button>
+      </div>
+
+      <!-- Sécurité -->
+      <div class="settings-card">
+        <div class="settings-info">
+          <div class="settings-icon">🔒</div>
+          <div class="settings-text">
+            <h3>Sécurité</h3>
+            <p>Changer le mot de passe</p>
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="font-size: 0.9rem;">Modifier</button>
+      </div>
+
+      <!-- Notifications -->
+      <div class="settings-card">
+        <div class="settings-info">
+          <div class="settings-icon">🔔</div>
+          <div class="settings-text">
+            <h3>Notifications</h3>
+            <p>Recevoir des rappels d'activités</p>
+          </div>
+        </div>
+        <div style="width: 44px; height: 24px; background: var(--violet); border-radius: 12px; position: relative; cursor: pointer;">
+          <div style="width: 20px; height: 20px; background: white; border-radius: 50%; position: absolute; top: 2px; right: 2px;"></div>
+        </div>
+      </div>
+
+      <!-- Mode hors ligne -->
+      <div class="settings-card">
+        <div class="settings-info">
+          <div class="settings-icon">📶</div>
+          <div class="settings-text">
+            <h3>Mode hors ligne</h3>
+            <p>Télécharger les cours pour y accéder sans internet</p>
+          </div>
+        </div>
+        <button class="btn btn-secondary" style="font-size: 0.9rem;">Télécharger</button>
+      </div>
+
+      <!-- Déconnexion -->
+      <button class="btn btn-primary" style="width: 100%; padding: 14px; background: var(--danger); box-shadow: none;" onclick="window.location.href='../index.html'">
+        Déconnexion
+      </button>
+
+    </main>
+  </div>
+</body>
+</html>
