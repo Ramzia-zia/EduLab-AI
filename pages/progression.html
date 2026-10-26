@@ -10,11 +10,7 @@
     .stat-box .label { color: var(--texte-gris); font-size: 0.9rem; font-weight: 500; }
     
     .chart-container { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); margin-top: 24px; }
-    .chart-bars { display: flex; align-items: flex-end; gap: 16px; height: 200px; margin-top: 32px; padding-bottom: 8px; border-bottom: 1px solid var(--bordure); }
-    .bar-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
-    .bar { width: 100%; background: var(--violet-clair); border-radius: 6px 6px 0 0; transition: height 0.3s; position: relative; }
-    .bar-fill { background: var(--violet); width: 100%; position: absolute; bottom: 0; border-radius: 6px 6px 0 0; }
-    .bar-label { font-size: 0.8rem; color: var(--texte-gris); font-weight: 600; }
+    .chart-canvas { width: 100%; height: 250px; }
     
     .activity-list { margin-top: 24px; }
     .activity-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--bordure); }
@@ -38,6 +34,7 @@
         <a href="assistant-ia.html">Assistant IA</a>
         <a href="communaute.html">Communauté</a>
         <a href="parametres.html">Paramètres</a>
+        <a href="espace-enseignant.html">Espace enseignant</a>
         <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
       </nav>
     </aside>
@@ -66,31 +63,10 @@
         </div>
       </div>
 
-      <!-- Graphique d'évolution -->
+      <!-- Graphique d'évolution (Canvas) -->
       <div class="chart-container">
         <h2 style="font-size: 1.2rem; font-weight: 700;">Évolution de mes résultats</h2>
-        <div class="chart-bars">
-          <div class="bar-wrapper">
-            <div class="bar" style="height: 40%;"><div class="bar-fill" style="height: 100%;"></div></div>
-            <div class="bar-label">S1</div>
-          </div>
-          <div class="bar-wrapper">
-            <div class="bar" style="height: 60%;"><div class="bar-fill" style="height: 100%;"></div></div>
-            <div class="bar-label">S2</div>
-          </div>
-          <div class="bar-wrapper">
-            <div class="bar" style="height: 50%;"><div class="bar-fill" style="height: 100%;"></div></div>
-            <div class="bar-label">S3</div>
-          </div>
-          <div class="bar-wrapper">
-            <div class="bar" style="height: 80%;"><div class="bar-fill" style="height: 100%;"></div></div>
-            <div class="bar-label">S4</div>
-          </div>
-          <div class="bar-wrapper">
-            <div class="bar" style="height: 95%;"><div class="bar-fill" style="height: 100%;"></div></div>
-            <div class="bar-label">S5</div>
-          </div>
-        </div>
+        <canvas id="progressChart" class="chart-canvas"></canvas>
       </div>
 
       <!-- Dernières activités -->
@@ -122,5 +98,100 @@
       </div>
     </main>
   </div>
+
+  <script>
+    // ==========================================
+    // GRAPHIQUE DE PROGRESSION (Dessiné sur Canvas)
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('progressChart');
+      if (!canvas) return;
+
+      // Ajuster la taille du canvas pour qu'il soit net (haute résolution)
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      
+      const ctx = canvas.getContext('2d');
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width;
+      const height = rect.height;
+      
+      // Les données à afficher (les résultats au fil des semaines)
+      const data = [40, 55, 50, 75, 85, 95];
+      const labels = ["S1", "S2", "S3", "S4", "S5", "S6"];
+
+      // Marges pour les axes
+      const padding = 40;
+      const graphWidth = width - padding * 2;
+      const graphHeight = height - padding * 2;
+
+      // --- Dessin des axes ---
+      ctx.beginPath();
+      ctx.strokeStyle = '#E2E8F0'; // Couleur gris clair
+      ctx.lineWidth = 1;
+      
+      // Axe Y (vertical) et ses lignes horizontales
+      for (let i = 0; i <= 4; i++) {
+        const y = padding + (graphHeight / 4) * i;
+        ctx.moveTo(padding, y);
+        ctx.lineTo(width - padding, y);
+        
+        // Texte de l'axe Y (0%, 25%, 50%, 75%, 100%)
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '12px Inter';
+        ctx.fillText(100 - (i * 25) + '%', 10, y + 4);
+      }
+      
+      // Axe X (horizontal)
+      ctx.moveTo(padding, padding);
+      ctx.lineTo(padding, height - padding);
+      ctx.lineTo(width - padding, height - padding);
+      ctx.stroke();
+
+      // --- Dessin de la ligne de progression ---
+      ctx.beginPath();
+      ctx.strokeStyle = '#5B35D5'; // Couleur violet
+      ctx.lineWidth = 3;
+      ctx.lineJoin = 'round';
+
+      data.forEach((val, i) => {
+        // Calculer la position X et Y
+        const x = padding + (graphWidth / (data.length - 1)) * i;
+        const y = height - padding - (val / 100) * graphHeight;
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+
+        // Texte de l'axe X (Semaines)
+        ctx.fillStyle = '#94A3B8';
+        ctx.font = '12px Inter';
+        ctx.fillText(labels[i], x - 8, height - padding + 20);
+      });
+      ctx.stroke();
+
+      // --- Dessin des points sur la ligne ---
+      data.forEach((val, i) => {
+        const x = padding + (graphWidth / (data.length - 1)) * i;
+        const y = height - padding - (val / 100) * graphHeight;
+
+        // Cercle blanc
+        ctx.beginPath();
+        ctx.fillStyle = 'white';
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Bordure violette
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = '#5B35D5';
+        ctx.stroke();
+      });
+    });
+  </script>
 </body>
 </html>
