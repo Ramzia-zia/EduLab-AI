@@ -1,87 +1,43 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>EduLab AI - Tableau de bord</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .stat-card { display: flex; align-items: center; gap: 16px; background: white; padding: 24px; border-radius: 16px; border: 1px solid var(--bordure); }
-    .stat-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; }
-    .stat-info h3 { font-size: 0.9rem; color: var(--texte-gris); font-weight: 500; margin-bottom: 4px; }
-    .stat-info .value { font-size: 1.5rem; font-weight: 700; color: var(--texte); }
-    .subject-card { border-radius: 16px; padding: 24px; display: flex; flex-direction: column; gap: 16px; transition: transform 0.2s; cursor: pointer; }
-    .subject-card:hover { transform: translateY(-4px); }
-    .subject-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; background: rgba(255,255,255,0.6); }
-    .subject-card h4 { font-size: 1.1rem; font-weight: 700; }
-    .subject-card p { font-size: 0.85rem; color: var(--texte-gris); }
-    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-    .dashboard-widgets { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 32px; }
-    .quote-widget { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); }
-    .quote-widget h4 { color: var(--violet); font-size: 1rem; margin-bottom: 12px; }
-    .quote-widget p { font-style: italic; color: var(--texte); font-size: 1.1rem; line-height: 1.4; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tableau de bord – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
   <div class="app-layout">
-    <aside class="sidebar">
-      <div class="logo">🧪 EduLab AI</div>
-      <nav>
-        <a href="tableau-bord.html" class="active">Accueil</a>
-        <a href="simulations.html">Simulations</a>
-        <a href="cours-exercices.html">Cours & Exercices</a>
-        <a href="progression.html">Mon suivi</a>
-        <a href="assistant-ia.html">Assistant IA</a>
-        <a href="communaute.html">Communauté</a>
-        <a href="parametres.html">Paramètres</a>
-        <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
-      </nav>
-    </aside>
-
-    <main class="main-content" style="background: #F8F9FA;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
-        <div>
-          <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">Bonjour Aminata 👋</h1>
-          <p style="color: var(--texte-gris); font-size: 1rem;">Prêt(e) à explorer le monde des sciences aujourd'hui ?</p>
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header">
+          <div><h1>Bonjour <span id="student-name">…</span></h1><p>Prêt(e) à explorer le monde des sciences ?</p></div>
+        </header>
+        <div id="dashboard-state" aria-live="polite"></div>
+        <div id="dashboard-body" class="stack" hidden>
+          <section class="grid grid--3" aria-label="Statistiques">
+            <article class="card"><p class="stat-card__label">Mes progrès</p><p class="stat-card__value" id="stat-done">–</p><div class="progress" aria-hidden="true"><div class="progress__bar" id="stat-done-bar"></div></div><p class="text-muted text-small">expériences complétées</p></article>
+            <article class="card"><p class="stat-card__label">Mon niveau</p><p class="stat-card__value text-success" id="stat-level">–</p><p class="text-muted text-small" id="stat-level-sub"></p></article>
+            <article class="card"><p class="stat-card__label">Prochaine activité</p><p class="stat-card__value stat-card__value--small" id="stat-next">–</p><a class="btn btn--primary btn--sm" id="stat-next-link" href="simulations.html">Commencer</a></article>
+          </section>
+          <div class="dashboard-layout">
+            <section class="card" aria-labelledby="subjects-title"><h2 class="card__title" id="subjects-title">Mes matières</h2><div class="grid grid--4" id="subjects-grid"></div></section>
+            <aside class="card quote-card" aria-labelledby="quote-title"><h2 class="card__title" id="quote-title">Citation du jour</h2><blockquote id="quote-text"></blockquote></aside>
+          </div>
+          <section class="card" aria-labelledby="recent-title"><h2 class="card__title" id="recent-title">Activités récentes</h2><ul id="recent-list" class="activity-list"></ul></section>
         </div>
-        <div style="width: 48px; height: 48px; background: var(--violet-clair); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 2px solid var(--violet);">
-          👤
-        </div>
-      </div>
-
-      <div class="grid-3">
-        <div class="stat-card">
-          <div class="stat-icon" style="background: #F3E8FF; color: var(--violet);">🧪</div>
-          <div class="stat-info"><h3>Mes expériences</h3><div class="value">3/12</div></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background: #DCFCE7; color: var(--succes);">📈</div>
-          <div class="stat-info"><h3>Mon niveau</h3><div class="value">Avancé</div></div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon" style="background: #E0F2FE; color: #0284C7;">⏱️</div>
-          <div class="stat-info"><h3>Prochaine activité</h3><div class="value" style="font-size: 1.1rem;">Titrage</div></div>
-        </div>
-      </div>
-
-      <h2 style="margin-top: 40px; margin-bottom: 20px; font-size: 1.2rem; font-weight: 700;">Mes matières</h2>
-      <div class="grid-4">
-        <div class="subject-card" style="background: #E0F2FE;"><div class="subject-icon">⚛️</div><div><h4>Physique</h4><p>5 expériences</p></div></div>
-        <div class="subject-card" style="background: #F3E8FF;"><div class="subject-icon">🧪</div><div><h4>Chimie</h4><p>7 expériences</p></div></div>
-        <div class="subject-card" style="background: #DCFCE7;"><div class="subject-icon">🌱</div><div><h4>SVT</h4><p>4 expériences</p></div></div>
-        <div class="subject-card" style="background: #FCE7F3;"><div class="subject-icon">📐</div><div><h4>Maths</h4><p>3 expériences</p></div></div>
-      </div>
-
-      <div class="dashboard-widgets">
-        <div class="quote-widget">
-          <h4>Citation du jour</h4>
-          <p>"Celui qui n'a pas un jour commis une erreur n'a jamais rien tenté."</p>
-        </div>
-        <div style="background: linear-gradient(135deg, #302078, #5B35D5); border-radius: 16px; padding: 24px; color: white; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 600;">
-          Apprendre aujourd'hui, construire demain.
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
+  <script type="module" src="../js/pages/dashboard.js"></script>
 </body>
 </html>

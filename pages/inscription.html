@@ -1,54 +1,68 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>EduLab AI - Inscription</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscription – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/inscription.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
-<body style="background: #F8F9FA;">
-  <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
-    <div class="card" style="width: 100%; max-width: 440px; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
-      
-      <!-- Flèche retour -->
-      <a href="connexion.html" style="display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--fond); border-radius: 50%; color: var(--texte); font-size: 1.2rem; margin-bottom: 16px;">←</a>
-
-      <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--texte);">Créer un compte</h1>
-        <p style="color: var(--texte-gris); font-size: 0.9rem; margin-top: 8px;">Rejoignez EduLab AI et commencez votre parcours</p>
-      </div>
-
-      <div class="tabs" style="display: flex; background: #F1F5F9; padding: 4px; border-radius: 10px; margin-bottom: 24px;">
-        <div style="flex: 1; padding: 10px; text-align: center; background: var(--violet-clair); color: var(--violet); border-radius: 8px; font-weight: 600; font-size: 0.9rem;">Élève</div>
-        <div style="flex: 1; padding: 10px; text-align: center; color: var(--texte-gris); font-weight: 600; font-size: 0.9rem;">Enseignant</div>
-      </div>
-
-      <form action="tableau-bord.html">
-        <div class="form-group">
-          <label>Adresse e-mail</label>
-          <input type="email" placeholder="exemple@email.com" required>
+<body class="auth-page">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="auth-header">
+    <a class="brand" href="../index.html"><img src="../assets/images/logo.svg" alt="" width="36" height="36"><span>EduLab AI</span></a>
+  </header>
+  <main class="auth-main" id="contenu" tabindex="-1">
+    <section class="card auth-card" aria-labelledby="auth-title">
+      <h1 id="auth-title">Créer un compte</h1>
+      <p class="text-muted">Rejoignez EduLab AI et commencez votre parcours</p>
+      <div class="form-message form-message--info" data-demo-note hidden></div>
+      <form id="register-form" class="stack" novalidate>
+        <fieldset class="segmented">
+          <legend class="sr-only">Je suis</legend>
+          <label><input type="radio" name="role" value="student" checked><span>Élève</span></label>
+          <label><input type="radio" name="role" value="teacher"><span>Enseignant</span></label>
+        </fieldset>
+        <div class="grid grid--2">
+        <div class="field">
+          <label class="field__label" for="lastName">Nom</label>
+          <input class="field__input" id="lastName" name="lastName" type="text" placeholder="Votre nom" autocomplete="family-name">
         </div>
-        <div class="form-group">
-          <label>Mot de passe</label>
-          <div style="position: relative;">
-            <input type="password" placeholder="Votre mot de passe" required style="padding-right: 40px;">
-            <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--texte-gris); cursor: pointer;">👁️</span>
+        <div class="field">
+          <label class="field__label" for="firstName">Prénom</label>
+          <input class="field__input" id="firstName" name="firstName" type="text" placeholder="Votre prénom" autocomplete="given-name">
+        </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="email">Adresse e-mail</label>
+          <input class="field__input" id="email" name="email" type="email" placeholder="exemple@email.com" autocomplete="email">
+        </div>
+        <div data-extra-fields class="stack"></div>
+        <div class="field">
+          <label class="field__label" for="password">Mot de passe</label>
+          <div class="input-group">
+            <input class="field__input" id="password" name="password" type="password" placeholder="8 caractères minimum" autocomplete="new-password">
+            <button type="button" class="input-group__toggle" data-toggle-password="password" aria-label="Afficher le mot de passe" aria-pressed="false"></button>
           </div>
         </div>
-        <div class="form-group">
-          <label>Confirmer le mot de passe</label>
-          <div style="position: relative;">
-            <input type="password" placeholder="Confirmer votre mot de passe" required style="padding-right: 40px;">
-            <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--texte-gris); cursor: pointer;">👁️</span>
+        <div class="field">
+          <label class="field__label" for="confirmPassword">Confirmer le mot de passe</label>
+          <div class="input-group">
+            <input class="field__input" id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" autocomplete="new-password">
+            <button type="button" class="input-group__toggle" data-toggle-password="confirmPassword" aria-label="Afficher le mot de passe" aria-pressed="false"></button>
           </div>
         </div>
-
-        <button type="submit" class="btn btn-primary btn-full" style="padding: 14px; font-size: 1rem; border-radius: 10px; margin-top: 8px;">S'inscrire</button>
+        <div class="field"><label class="checkbox"><input type="checkbox" id="acceptTerms" name="acceptTerms"><span>J’accepte les <button type="button" class="link-button" id="terms-link">conditions d’utilisation</button></span></label></div>
+        <div id="form-message" hidden></div>
+        <button class="btn btn--primary btn--block" type="submit">S’inscrire</button>
       </form>
-
-      <p style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--texte-gris);">
-        Vous avez déjà un compte ? <a href="connexion.html" style="color: var(--violet); font-weight: 600;">Se connecter</a>
-      </p>
-    </div>
-  </div>
+      <p class="auth-switch text-small">Vous avez déjà un compte ? <a href="connexion.html">Se connecter</a></p>
+    </section>
+  </main>
+  <script type="module" src="../js/pages/inscription.js"></script>
 </body>
 </html>

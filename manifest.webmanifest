@@ -1,0 +1,11 @@
+{
+  "name": "EduLab AI",
+  "short_name": "EduLab",
+  "description": "Laboratoires virtuels intelligents pour l'enseignement secondaire au Togo",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F7FC",
+  "theme_color": "#5B35D5",
+  "icons": [{ "src": "assets/icons/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

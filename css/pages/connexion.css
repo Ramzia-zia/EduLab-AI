@@ -1,0 +1,13 @@
+/* Pages de connexion et d'inscription (carte centrée) */
+.auth-page { background: var(--color-bg); min-height: 100vh; display: flex; flex-direction: column; }
+.auth-header { padding: 18px 24px; }
+.brand { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; color: var(--color-primary-dark); text-decoration: none; }
+.auth-main { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 8px 16px 40px; }
+.auth-card { width: 100%; max-width: 440px; padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+.auth-card h1 { font-size: 1.5rem; text-align: center; }
+.auth-card > p { text-align: center; }
+.link-button { background: none; border: 0; padding: 10px 0; min-height: var(--tap-size); color: var(--color-primary); font-weight: 700; font-size: 0.85rem; text-decoration: underline; }
+.auth-divider { display: flex; align-items: center; gap: 12px; color: var(--color-text-muted); font-size: 0.8rem; }
+.auth-divider::before, .auth-divider::after { content: ""; flex: 1; height: 1px; background: var(--color-border); }
+.auth-switch { text-align: center; }
+fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }

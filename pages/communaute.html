@@ -1,96 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>EduLab AI - Communauté</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .tabs-header { display: flex; background: var(--fond); border-radius: 10px; padding: 4px; margin-bottom: 32px; width: fit-content; }
-    .tab-item { padding: 10px 24px; border-radius: 8px; font-weight: 600; color: var(--texte-gris); cursor: pointer; font-size: 0.95rem; }
-    .tab-item.active { background: white; color: var(--violet); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-    
-    .post-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); margin-bottom: 16px; }
-    .post-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-    .post-avatar { width: 40px; height: 40px; border-radius: 50%; background: #E2E8F0; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-    .post-meta h4 { font-size: 0.95rem; font-weight: 700; }
-    .post-meta p { font-size: 0.8rem; color: var(--texte-gris); }
-    .post-content { font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
-    .post-footer { display: flex; gap: 16px; color: var(--texte-gris); font-size: 0.85rem; font-weight: 500; }
-    .post-footer span { cursor: pointer; display: flex; align-items: center; gap: 4px; }
-    .post-footer span:hover { color: var(--violet); }
-    
-    .fab { position: fixed; bottom: 32px; right: 32px; width: 56px; height: 56px; background: var(--violet); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 12px rgba(91, 53, 213, 0.3); cursor: pointer; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Communauté – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/communaute.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
   <div class="app-layout">
-    <aside class="sidebar">
-      <div class="logo">🧪 EduLab AI</div>
-      <nav>
-        <a href="tableau-bord.html">Accueil</a>
-        <a href="simulations.html">Simulations</a>
-        <a href="cours-exercices.html">Cours & Exercices</a>
-        <a href="progression.html">Mon suivi</a>
-        <a href="assistant-ia.html">Assistant IA</a>
-        <a href="communaute.html" class="active">Communauté</a>
-        <a href="parametres.html">Paramètres</a>
-        <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
-      </nav>
-    </aside>
-
-    <main class="main-content" style="background: #F8F9FA;">
-      <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 24px;">Communauté</h1>
-
-      <div class="tabs-header">
-        <div class="tab-item active">Tout</div>
-        <div class="tab-item">Conseils</div>
-        <div class="tab-item">Questions</div>
-        <div class="tab-item">Témoignages</div>
-      </div>
-
-      <!-- Post 1 -->
-      <div class="post-card">
-        <div class="post-header">
-          <div class="post-avatar">👩🏾</div>
-          <div class="post-meta">
-            <h4>Sara K. <span style="color: var(--violet); font-weight: 500;">• Conseils</span></h4>
-            <p>Il y a 2 jours</p>
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header">
+          <div><h1>Communauté</h1><p>Pose des questions, partage tes conseils et réponds aux autres élèves.</p></div>
+          <button type="button" class="btn btn--primary" id="new-post">Publier une question</button>
+        </header>
+        <div class="form-message form-message--info" data-community-note hidden></div>
+        <div class="community-toolbar">
+          <div class="tabs" role="tablist" aria-label="Catégories" id="category-tabs"></div>
+          <div class="row">
+            <div class="field"><label class="sr-only" for="post-search">Rechercher un sujet</label><input class="field__input" id="post-search" type="search" placeholder="Rechercher un sujet…" autocomplete="off"></div>
+            <div class="field"><label class="sr-only" for="post-sort">Trier</label><select class="field__input" id="post-sort"><option value="recent">Plus récents</option><option value="popular">Plus appréciés</option></select></div>
           </div>
         </div>
-        <div class="post-content">
-          <strong>Comment mieux réviser en chimie ?</strong><br><br>
-          Je te conseille de bien comprendre les bases et de refaire les expériences plusieurs fois. C'est en pratiquant qu'on progresse !
-        </div>
-        <div class="post-footer">
-          <span>👍 24</span>
-          <span>💬 5</span>
-          <span style="margin-left: auto;">↩️ Répondre</span>
-        </div>
-      </div>
-
-      <!-- Post 2 -->
-      <div class="post-card">
-        <div class="post-header">
-          <div class="post-avatar">👨🏾</div>
-          <div class="post-meta">
-            <h4>Issa T. <span style="color: #0284C7; font-weight: 500;">• Question</span></h4>
-            <p>Il y a 3 jours</p>
-          </div>
-        </div>
-        <div class="post-content">
-          <strong>Quel est le bon volume pour une dilution ?</strong><br><br>
-          Bonjour, quelqu'un peut-il m'expliquer comment calculer le volume pour une dilution ? Merci !
-        </div>
-        <div class="post-footer">
-          <span>👍 12</span>
-          <span>💬 8</span>
-          <span style="margin-left: auto;">↩️ Répondre</span>
-        </div>
-      </div>
-
-      <!-- Bouton flottant -->
-      <div class="fab">+</div>
-    </main>
+        <div id="posts-state" aria-live="polite"></div>
+        <ul id="posts-list" class="stack"></ul>
+      </main>
+    </div>
   </div>
+  <script type="module" src="../js/pages/communaute.js"></script>
 </body>
 </html>

@@ -1,0 +1,4 @@
+/* L'inscription réutilise la carte de connexion (connexion.css). Styles propres à ce formulaire : */
+@import url("connexion.css");
+.auth-card .grid--2 { gap: 12px; }
+[data-extra-fields]:empty { display: none; }

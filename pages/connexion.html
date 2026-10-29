@@ -1,58 +1,55 @@
-﻿ <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>EduLab AI - Connexion</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/connexion.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
-<body style="background: #F8F9FA;">
-  <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px;">
-    <div class="card" style="width: 100%; max-width: 440px; padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.05);">
-      <div style="text-align: center; margin-bottom: 24px;">
-        <div style="font-size: 2rem; margin-bottom: 8px;">🧪</div>
-        <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--texte);">EduLab AI</h1>
-        <h2 style="font-size: 1.3rem; margin-top: 16px;">Connexion</h2>
-        <p style="color: var(--texte-gris); font-size: 0.9rem;">Accédez à votre espace d'apprentissage</p>
-      </div>
-
-      <div class="tabs" style="display: flex; background: #F1F5F9; padding: 4px; border-radius: 10px; margin-bottom: 24px;">
-        <div style="flex: 1; padding: 10px; text-align: center; background: var(--violet); color: white; border-radius: 8px; font-weight: 600; font-size: 0.9rem;">👤 Élève</div>
-        <div style="flex: 1; padding: 10px; text-align: center; color: var(--texte-gris); font-weight: 600; font-size: 0.9rem;">Enseignant</div>
-      </div>
-
-      <form action="tableau-bord.html">
-        <div class="form-group">
-          <label>Adresse e-mail</label>
-          <input type="email" placeholder="exemple@email.com" required>
+<body class="auth-page">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="auth-header">
+    <a class="brand" href="../index.html"><img src="../assets/images/logo.svg" alt="" width="36" height="36"><span>EduLab AI</span></a>
+  </header>
+  <main class="auth-main" id="contenu" tabindex="-1">
+    <section class="card auth-card" aria-labelledby="auth-title">
+      <h1 id="auth-title">Connexion</h1>
+      <p class="text-muted">Accédez à votre espace d’apprentissage</p>
+      <div class="form-message form-message--info" data-demo-note hidden></div>
+      <form id="login-form" class="stack" novalidate>
+        <fieldset class="segmented">
+          <legend class="sr-only">Je suis</legend>
+          <label><input type="radio" name="role" value="student" checked><span>Élève</span></label>
+          <label><input type="radio" name="role" value="teacher"><span>Enseignant</span></label>
+        </fieldset>
+        <div class="field">
+          <label class="field__label" for="email">Adresse e-mail</label>
+          <input class="field__input" id="email" name="email" type="email" placeholder="exemple@email.com" autocomplete="email">
         </div>
-        <div class="form-group">
-          <label>Mot de passe</label>
-          <input type="password" placeholder="Votre mot de passe" required>
+        <div class="field">
+          <label class="field__label" for="password">Mot de passe</label>
+          <div class="input-group">
+            <input class="field__input" id="password" name="password" type="password" placeholder="Votre mot de passe" autocomplete="current-password">
+            <button type="button" class="input-group__toggle" data-toggle-password="password" aria-label="Afficher le mot de passe" aria-pressed="false"></button>
+          </div>
         </div>
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.85rem;">
-          <label style="display: flex; align-items: center; gap: 8px; color: var(--texte-gris); font-weight: 500;">
-            <input type="checkbox" style="width: auto;"> Se souvenir de moi
-          </label>
-          <a href="#" style="color: var(--violet); font-weight: 600;">Mot de passe oublié ?</a>
+        <div class="row row--between">
+          <div class="field"><label class="checkbox"><input type="checkbox" name="remember"><span>Se souvenir de moi</span></label></div>
+          <button type="button" class="link-button" id="forgot-link">Mot de passe oublié ?</button>
         </div>
-
-        <button type="submit" class="btn btn-primary btn-full" style="padding: 14px; font-size: 1rem; border-radius: 10px;">Se connecter</button>
+        <div id="form-message" hidden></div>
+        <button class="btn btn--primary btn--block" type="submit">Se connecter</button>
       </form>
-
-      <div style="text-align: center; margin: 24px 0; color: var(--texte-gris); font-size: 0.85rem;">
-        <span style="background: #F8F9FA; padding: 0 10px; position: relative; z-index: 1;">Ou se connecter avec</span>
-        <div style="border-top: 1px solid var(--bordure); margin-top: -10px;"></div>
-      </div>
-
-      <button class="btn btn-secondary btn-full" style="display: flex; justify-content: center; gap: 8px; padding: 12px;">
-        <span style="color: #DB4437; font-weight: bold; font-size: 1.2rem;">G</span> Se connecter avec Google
-      </button>
-
-      <p style="text-align: center; margin-top: 24px; font-size: 0.9rem; color: var(--texte-gris);">
-        Vous n'avez pas de compte ? <a href="inscription.html" style="color: var(--violet); font-weight: 600;">Inscrivez-vous</a>
-      </p>
-    </div>
-  </div>
+      <div class="auth-divider"><span>Ou se connecter avec</span></div>
+      <button class="btn btn--secondary btn--block" type="button" disabled aria-disabled="true">Google (bientôt disponible)</button>
+      <p class="auth-switch text-small">Vous n’avez pas de compte ? <a href="inscription.html">Inscrivez-vous</a></p>
+    </section>
+  </main>
+  <script type="module" src="../js/pages/connexion.js"></script>
 </body>
 </html>

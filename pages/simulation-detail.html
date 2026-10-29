@@ -1,177 +1,63 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>EduLab AI - Simulation</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .lab-grid { display: grid; grid-template-columns: 240px 1fr 300px; gap: 24px; align-items: start; }
-    .lab-card { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); }
-    .lab-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-    .step-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 500; }
-    .step-num { width: 24px; height: 24px; background: var(--violet); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
-    .material-item { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 0.9rem; font-weight: 500; color: var(--texte-gris); }
-    .material-icon { font-size: 1.2rem; width: 24px; text-align: center; }
-    input[type=range] { width: 100%; accent-color: var(--violet); cursor: pointer; height: 6px; border-radius: 3px; background: var(--bordure); -webkit-appearance: none; }
-    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--violet); cursor: pointer; box-shadow: 0 2px 6px rgba(91,53,213,0.3); }
-    .canvas-container { background: #F1F5F9; border-radius: 16px; padding: 20px; display: flex; justify-content: center; align-items: center; aspect-ratio: 1; position: relative; overflow: hidden; }
-    .ph-gradient { height: 12px; border-radius: 6px; background: linear-gradient(to right, #EF4444, #F59E0B, #10B981, #3B82F6, #6D28D9); margin-top: 8px; position: relative; }
-    
-    /* Le SVG prend toute la place */
-    .lab-svg { width: 100%; height: 100%; max-width: 400px; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulation – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/simulation-detail.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
-  <div style="min-height: 100vh; background: #F8F9FA; display: flex; flex-direction: column;">
-    <!-- Header simple -->
-    <header style="background: white; padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--bordure);">
-      <div style="display: flex; align-items: center; gap: 24px;">
-        <a href="simulations.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">← Retour</a>
-        <h1 style="font-size: 1.2rem; font-weight: 700;">Titrage acido-basique</h1>
-      </div>
-      <div style="width: 36px; height: 36px; background: var(--violet-clair); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--violet);">👤</div>
-    </header>
-
-    <!-- Contenu du Labo -->
-    <main style="flex: 1; padding: 32px; display: flex; justify-content: center;">
-      <div class="lab-grid" style="width: 100%; max-width: 1200px;">
-        
-        <!-- Colonne de gauche : Matériel -->
-        <div class="lab-card">
-          <div class="lab-title">Matériel</div>
-          <div class="material-item"><span class="material-icon">💧</span> Burette</div>
-          <div class="material-item"><span class="material-icon">🧪</span> Erlenmeyer</div>
-          <div class="material-item"><span class="material-icon">🧴</span> Solution acide</div>
-          <div class="material-item"><span class="material-icon">🧴</span> Solution basique</div>
-          <div class="material-item"><span class="material-icon">🎨</span> Indicateur coloré</div>
-        </div>
-
-        <!-- Colonne du milieu : Les instruments SVG -->
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <div class="canvas-container">
-            <!-- Dessin SVG des instruments -->
-            <svg class="lab-svg" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
-              <!-- Support métallique -->
-              <rect x="50" y="350" width="200" height="15" fill="#475569" rx="4" />
-              <rect x="60" y="100" width="10" height="250" fill="#64748B" />
-              
-              <!-- Pince de la burette -->
-              <rect x="70" y="120" width="60" height="10" fill="#94A3B8" rx="2" />
-              <rect x="120" y="110" width="10" height="30" fill="#475569" />
-
-              <!-- Burette (Verre) -->
-              <rect x="140" y="20" width="26" height="180" fill="rgba(226, 232, 240, 0.5)" stroke="#94A3B8" stroke-width="2" rx="2" />
-              <!-- Graduations -->
-              <line x1="140" y1="40" x2="150" y2="40" stroke="#64748B" stroke-width="1" />
-              <line x1="140" y1="60" x2="150" y2="60" stroke="#64748B" stroke-width="1" />
-              <line x1="140" y1="80" x2="150" y2="80" stroke="#64748B" stroke-width="1" />
-              <line x1="140" y1="100" x2="150" y2="100" stroke="#64748B" stroke-width="1" />
-              <line x1="140" y1="120" x2="150" y2="120" stroke="#64748B" stroke-width="1" />
-              <line x1="140" y1="140" x2="150" y2="140" stroke="#64748B" stroke-width="1" />
-              <line x1="140" y1="160" x2="150" y2="160" stroke="#64748B" stroke-width="1" />
-              
-              <!-- Robinet -->
-              <rect x="145" y="200" width="16" height="15" fill="#F59E0B" />
-              <path d="M 145 215 L 153 230 L 161 215 Z" fill="#475569" />
-
-              <!-- Goutte qui tombe (animée via CSS) -->
-              <circle id="drop" cx="153" cy="240" r="3" fill="#3B82F6" opacity="0" />
-
-              <!-- Erlenmeyer (Fiole) -->
-              <!-- Le contour -->
-              <path d="M 120 260 L 186 260 L 170 350 L 136 350 Z" fill="rgba(255, 255, 255, 0.6)" stroke="#94A3B8" stroke-width="3" stroke-linejoin="round" />
-              <!-- Le col -->
-              <rect x="136" y="240" width="34" height="20" fill="rgba(255, 255, 255, 0.6)" stroke="#94A3B8" stroke-width="3" />
-              
-              <!-- Le liquide (couleur modifiée par JS) -->
-              <path id="liquid" d="M 129 300 L 177 300 L 170 348 L 136 348 Z" fill="#E2E8F0" opacity="0.8" />
-              
-              <!-- Reflet sur le verre -->
-              <path d="M 125 265 L 135 340" stroke="rgba(255,255,255,0.8)" stroke-width="4" stroke-linecap="round" />
-            </svg>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <a class="btn btn--secondary btn--sm" href="simulations.html" id="back-link">Retour au catalogue</a>
+            <h1 id="sim-title">Simulation</h1><p id="sim-meta"></p>
           </div>
-          
-          <!-- Barre de volume en bas -->
-          <div class="lab-card" style="padding: 16px 24px;">
-            <div style="display: flex; justify-content: space-between; font-weight: 600; font-size: 0.9rem; margin-bottom: 8px;">
-              <span>Volume versé</span>
-              <span id="volume-value" style="color: var(--violet);">0.0 mL</span>
+        </header>
+        <div id="sim-state" aria-live="polite"></div>
+        <div class="lab-layout" id="lab" hidden>
+          <aside class="stack" aria-label="Matériel et consignes">
+            <section class="card"><h2 class="card__title">Matériel</h2><ul id="instruments-list" class="item-list"></ul></section>
+            <section class="card"><h2 class="card__title">Consignes</h2><ul id="instructions-list" class="bullet-list"></ul></section>
+          </aside>
+          <section class="stack" aria-label="Expérience">
+            <div class="card">
+              <div class="lab-toolbar" role="toolbar" aria-label="Contrôles de l’expérience">
+                <button type="button" class="btn btn--primary" data-action="start">Démarrer</button>
+                <button type="button" class="btn btn--secondary" data-action="reset">Réinitialiser</button>
+                <span class="lab-toolbar__spacer"></span>
+                <button type="button" class="btn btn--ghost" data-action="prev">Précédent</button>
+                <button type="button" class="btn btn--ghost" data-action="next">Suivant</button>
+              </div>
+              <div id="sim-error" hidden></div>
+              <div id="sim-stage" class="lab-stage"></div>
             </div>
-            <input type="range" id="volume-slider" min="0" max="40" step="0.1" value="0">
-          </div>
-        </div>
-
-        <!-- Colonne de droite : Étapes et pH -->
-        <div style="display: flex; flex-direction: column; gap: 16px;">
-          <div class="lab-card">
-            <div class="lab-title">Étapes</div>
-            <div class="step-item"><span class="step-num">1</span> Ajouter la solution acide</div>
-            <div class="step-item"><span class="step-num">2</span> Ajouter l'indicateur</div>
-            <div class="step-item"><span class="step-num">3</span> Verser la solution basique</div>
-            <div class="step-item"><span class="step-num">4</span> Observer le changement de couleur</div>
-          </div>
-
-          <div class="lab-card">
-            <div style="font-weight: 700; margin-bottom: 8px; font-size: 0.9rem;">pH actuel</div>
-            <div id="ph-value" style="font-size: 1.5rem; font-weight: 700; color: var(--texte);">7.2</div>
-            <div class="ph-gradient">
-              <div id="ph-marker" style="position: absolute; top: -4px; left: 50%; width: 20px; height: 20px; background: white; border: 2px solid var(--texte); border-radius: 50%; transform: translateX(-50%); transition: left 0.2s;"></div>
+            <div class="card" aria-live="polite">
+              <h2 class="card__title">Résultats et mesures</h2>
+              <ul id="measures-list" class="item-list"></ul>
+              <div class="row lab-save"><button type="button" class="btn btn--secondary" id="save-result" disabled>Enregistrer le résultat</button><span id="save-status" class="text-small"></span></div>
             </div>
-          </div>
-
-          <button onclick="window.location.href='progression.html'" class="btn btn-primary" style="width: 100%; padding: 14px; border-radius: 10px;">Continuer</button>
+            <div class="card chart" id="chart-card" hidden><h2 class="card__title">Graphique</h2><div id="sim-chart"></div></div>
+          </section>
+          <aside class="stack" aria-label="Étapes">
+            <section class="card"><h2 class="card__title">Étapes</h2><ol id="steps-list" class="steps"></ol></section>
+            <section class="card"><p class="stat-card__label" id="live-label">Mesure en cours</p><p class="stat-card__value" id="live-value">–</p></section>
+          </aside>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
-
-  <!-- Le script pour faire fonctionner le SVG -->
-  <script>
-    const slider = document.getElementById('volume-slider');
-    const phEl = document.getElementById('ph-value');
-    const volEl = document.getElementById('volume-value');
-    const marker = document.getElementById('ph-marker');
-    const liquid = document.getElementById('liquid');
-    const drop = document.getElementById('drop');
-
-    function calcPh(v) {
-      const nA = 0.1 * 20, nB = 0.1 * v, vt = 20 + v;
-      if (Math.abs(nB - nA) < 0.05) return 7;
-      if (nB < nA) return -Math.log10((nA - nB) / vt);
-      return 14 + Math.log10((nB - nA) / vt);
-    }
-
-    slider.addEventListener('input', (e) => {
-      const v = parseFloat(e.target.value);
-      const p = calcPh(v);
-      
-      // Mise à jour des textes
-      phEl.textContent = p.toFixed(1);
-      volEl.textContent = v.toFixed(1) + ' mL';
-      marker.style.left = (p / 14) * 100 + '%';
-
-      // Changement de couleur du liquide dans l'Erlenmeyer
-      if (p > 10) {
-        liquid.setAttribute('fill', '#F472B6'); // Rose vif (basique)
-      } else if (p >= 8.2) {
-        liquid.setAttribute('fill', '#FBCFE8'); // Rose clair
-      } else {
-        liquid.setAttribute('fill', '#E2E8F0'); // Incolore (acide)
-      }
-
-      // Animation de la goutte (si on verse)
-      if (v > 0 && v < 40) {
-        drop.style.opacity = '1';
-        // Animation simple : la goutte tombe
-        drop.setAttribute('cy', '240');
-        setTimeout(() => { drop.setAttribute('cy', '260'); }, 100);
-      } else {
-        drop.style.opacity = '0';
-      }
-    });
-
-    // Initialisation
-    slider.dispatchEvent(new Event('input'));
-  </script>
+  <script type="module" src="../js/pages/simulation-detail.js"></script>
 </body>
 </html>

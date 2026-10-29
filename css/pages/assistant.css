@@ -1,0 +1,12 @@
+/* Assistant IA : conversation */
+.chat { display: flex; flex-direction: column; gap: 12px; padding: 0; overflow: hidden; }
+.chat__log { display: flex; flex-direction: column; gap: 12px; padding: 20px; min-height: 280px; max-height: 52vh; overflow-y: auto; }
+.bubble { max-width: min(560px, 88%); padding: 12px 14px; border-radius: 14px; font-size: 0.9rem; }
+.bubble--user { align-self: flex-end; background: var(--color-primary-soft); color: var(--color-primary-dark); border-bottom-right-radius: 4px; }
+.bubble--assistant { align-self: flex-start; background: #fff; border: 1px solid var(--color-border); border-bottom-left-radius: 4px; }
+.bubble__tag { display: inline-block; margin-bottom: 6px; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 99px; background: var(--color-warning-soft); color: var(--color-warning); }
+.chat__typing { padding: 0 20px; color: var(--color-text-muted); font-size: 0.85rem; font-style: italic; }
+.chat__suggestions, .chat__actions { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 20px; }
+.chat__form { display: flex; gap: 8px; padding: 14px 20px; border-top: 1px solid var(--color-border); background: var(--color-bg); }
+.chat__form .field__input { flex: 1; }
+#chat-error { padding: 0 20px; }

@@ -1,0 +1,6 @@
+/* Feuille d'entrée : elle regroupe les styles communs. Chaque page ajoute ensuite son propre fichier. */
+@import url("reset.css");
+@import url("variables.css");
+@import url("global.css");
+@import url("layout.css");
+@import url("components.css");

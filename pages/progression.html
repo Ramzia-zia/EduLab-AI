@@ -1,197 +1,40 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>EduLab AI - Mon suivi</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <style>
-    .stat-box { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); text-align: center; }
-    .stat-box .value { font-size: 2.5rem; font-weight: 800; color: var(--violet); margin-bottom: 8px; }
-    .stat-box .label { color: var(--texte-gris); font-size: 0.9rem; font-weight: 500; }
-    
-    .chart-container { background: white; border-radius: 16px; padding: 24px; border: 1px solid var(--bordure); margin-top: 24px; }
-    .chart-canvas { width: 100%; height: 250px; }
-    
-    .activity-list { margin-top: 24px; }
-    .activity-item { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--bordure); }
-    .activity-item:last-child { border-bottom: none; }
-    .activity-info h4 { font-size: 1rem; font-weight: 600; margin-bottom: 4px; }
-    .activity-info p { font-size: 0.85rem; color: var(--texte-gris); }
-    .score { font-weight: 700; font-size: 1.1rem; }
-    .score.good { color: var(--succes); }
-    .score.average { color: #F59E0B; }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon suivi – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/progression.css">
+  <link rel="stylesheet" href="../css/responsive.css">
 </head>
 <body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
   <div class="app-layout">
-    <aside class="sidebar">
-      <div class="logo">🧪 EduLab AI</div>
-      <nav>
-        <a href="tableau-bord.html">Accueil</a>
-        <a href="simulations.html">Simulations</a>
-        <a href="cours-exercices.html">Cours & Exercices</a>
-        <a href="progression.html" class="active">Mon suivi</a>
-        <a href="assistant-ia.html">Assistant IA</a>
-        <a href="communaute.html">Communauté</a>
-        <a href="parametres.html">Paramètres</a>
-        <a href="espace-enseignant.html">Espace enseignant</a>
-        <a href="../index.html" style="color: var(--danger); margin-top: auto;">Déconnexion</a>
-      </nav>
-    </aside>
-
-    <main class="main-content" style="background: #F8F9FA;">
-      <div style="margin-bottom: 32px;">
-        <h1 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 8px;">Mon suivi</h1>
-        <p style="color: var(--texte-gris); font-size: 1rem;">Découvre ta progression globale</p>
-      </div>
-
-      <!-- Statistiques -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-        <div class="stat-box">
-          <div class="value">68%</div>
-          <div class="label">Niveau global</div>
-          <div style="height: 8px; background: var(--bordure); border-radius: 4px; margin-top: 16px; overflow: hidden;">
-            <div style="height: 100%; width: 68%; background: var(--violet); border-radius: 4px;"></div>
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header"><div><h1>Mon suivi</h1><p>Visualise ta progression et tes résultats.</p></div></header>
+        <div id="progress-state" aria-live="polite"></div>
+        <div id="progress-body" class="stack" hidden>
+          <div class="grid grid--2">
+            <section class="card chart progress-donut"><h2 class="card__title">Progression globale</h2><div id="donut" class="donut"></div></section>
+            <section class="card chart"><h2 class="card__title">Résultats par matière</h2><div id="subject-chart"></div></section>
+          </div>
+          <section class="card chart"><h2 class="card__title">Évolution de mes résultats</h2><div id="evolution-chart"></div></section>
+          <div class="grid grid--2">
+            <section class="card"><h2 class="card__title">Simulations terminées</h2><ul id="completed-list" class="activity-list"></ul></section>
+            <section class="card"><h2 class="card__title">Historique des activités</h2><div class="table-wrap"><table class="table"><caption class="sr-only">Historique</caption><thead><tr><th scope="col">Activité</th><th scope="col">Score</th><th scope="col">Date</th></tr></thead><tbody id="history-body"></tbody></table></div></section>
           </div>
         </div>
-        <div class="stat-box">
-          <div class="value">3/12</div>
-          <div class="label">Expériences terminées</div>
-          <div style="height: 8px; background: var(--bordure); border-radius: 4px; margin-top: 16px; overflow: hidden;">
-            <div style="height: 100%; width: 25%; background: var(--succes); border-radius: 4px;"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Graphique d'évolution (Canvas) -->
-      <div class="chart-container">
-        <h2 style="font-size: 1.2rem; font-weight: 700;">Évolution de mes résultats</h2>
-        <canvas id="progressChart" class="chart-canvas"></canvas>
-      </div>
-
-      <!-- Dernières activités -->
-      <div class="chart-container">
-        <h2 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 16px;">Dernières activités</h2>
-        <div class="activity-list">
-          <div class="activity-item">
-            <div class="activity-info">
-              <h4>Titrage acide-base</h4>
-              <p>Chimie • Terminé récemment</p>
-            </div>
-            <div class="score good">95%</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-info">
-              <h4>Réaction de précipitation</h4>
-              <p>Chimie • Hier</p>
-            </div>
-            <div class="score good">80%</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-info">
-              <h4>Équilibrer une équation</h4>
-              <p>Chimie • Il y a 3 jours</p>
-            </div>
-            <div class="score average">60%</div>
-          </div>
-        </div>
-      </div>
-    </main>
+      </main>
+    </div>
   </div>
-
-  <script>
-    // ==========================================
-    // GRAPHIQUE DE PROGRESSION (Dessiné sur Canvas)
-    // ==========================================
-    document.addEventListener('DOMContentLoaded', () => {
-      const canvas = document.getElementById('progressChart');
-      if (!canvas) return;
-
-      // Ajuster la taille du canvas pour qu'il soit net (haute résolution)
-      const dpr = window.devicePixelRatio || 1;
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * dpr;
-      canvas.height = rect.height * dpr;
-      
-      const ctx = canvas.getContext('2d');
-      ctx.scale(dpr, dpr);
-
-      const width = rect.width;
-      const height = rect.height;
-      
-      // Les données à afficher (les résultats au fil des semaines)
-      const data = [40, 55, 50, 75, 85, 95];
-      const labels = ["S1", "S2", "S3", "S4", "S5", "S6"];
-
-      // Marges pour les axes
-      const padding = 40;
-      const graphWidth = width - padding * 2;
-      const graphHeight = height - padding * 2;
-
-      // --- Dessin des axes ---
-      ctx.beginPath();
-      ctx.strokeStyle = '#E2E8F0'; // Couleur gris clair
-      ctx.lineWidth = 1;
-      
-      // Axe Y (vertical) et ses lignes horizontales
-      for (let i = 0; i <= 4; i++) {
-        const y = padding + (graphHeight / 4) * i;
-        ctx.moveTo(padding, y);
-        ctx.lineTo(width - padding, y);
-        
-        // Texte de l'axe Y (0%, 25%, 50%, 75%, 100%)
-        ctx.fillStyle = '#94A3B8';
-        ctx.font = '12px Inter';
-        ctx.fillText(100 - (i * 25) + '%', 10, y + 4);
-      }
-      
-      // Axe X (horizontal)
-      ctx.moveTo(padding, padding);
-      ctx.lineTo(padding, height - padding);
-      ctx.lineTo(width - padding, height - padding);
-      ctx.stroke();
-
-      // --- Dessin de la ligne de progression ---
-      ctx.beginPath();
-      ctx.strokeStyle = '#5B35D5'; // Couleur violet
-      ctx.lineWidth = 3;
-      ctx.lineJoin = 'round';
-
-      data.forEach((val, i) => {
-        // Calculer la position X et Y
-        const x = padding + (graphWidth / (data.length - 1)) * i;
-        const y = height - padding - (val / 100) * graphHeight;
-
-        if (i === 0) {
-          ctx.moveTo(x, y);
-        } else {
-          ctx.lineTo(x, y);
-        }
-
-        // Texte de l'axe X (Semaines)
-        ctx.fillStyle = '#94A3B8';
-        ctx.font = '12px Inter';
-        ctx.fillText(labels[i], x - 8, height - padding + 20);
-      });
-      ctx.stroke();
-
-      // --- Dessin des points sur la ligne ---
-      data.forEach((val, i) => {
-        const x = padding + (graphWidth / (data.length - 1)) * i;
-        const y = height - padding - (val / 100) * graphHeight;
-
-        // Cercle blanc
-        ctx.beginPath();
-        ctx.fillStyle = 'white';
-        ctx.arc(x, y, 5, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Bordure violette
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = '#5B35D5';
-        ctx.stroke();
-      });
-    });
-  </script>
+  <script type="module" src="../js/pages/progression.js"></script>
 </body>
 </html>

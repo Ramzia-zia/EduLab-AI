@@ -1,0 +1,12 @@
+/* Communauté */
+.community-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.community-toolbar .tabs { flex: 1; min-width: 260px; }
+.post__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 6px; }
+.post h3 { font-size: 1.05rem; }
+.post__body { color: var(--color-text-muted); margin: 6px 0 12px; }
+.post__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.replies { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--color-border); display: flex; flex-direction: column; gap: 10px; }
+.reply { padding: 10px 12px; border-radius: var(--radius-sm); background: var(--color-bg); font-size: 0.9rem; }
+.reply strong { display: block; font-size: 0.8rem; }
+.reply-form { display: flex; gap: 8px; }
+.reply-form .field { flex: 1; }

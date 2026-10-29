@@ -1,0 +1,20 @@
+/* Styles de base communs à toutes les pages. */
+body { font-family: var(--font-main); color: var(--color-text); background: var(--color-bg); line-height: 1.5; font-size: 1rem; }
+[data-text-size="large"] { font-size: 112.5%; }
+h1 { font-size: 1.75rem; line-height: 1.2; font-weight: 800; }
+h2 { font-size: 1.125rem; font-weight: 700; }
+h3 { font-size: 1rem; font-weight: 700; }
+a:not([class]) { color: var(--color-primary); font-weight: 600; text-decoration: none; }
+a:not([class]):hover { text-decoration: underline; }
+.text-muted { color: var(--color-text-muted); }
+.text-small { font-size: 0.875rem; }
+.text-success { color: var(--color-success); }
+.text-danger { color: var(--color-danger); }
+.text-warning { color: var(--color-warning); }
+[hidden] { display: none !important; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip-link { position: absolute; left: 8px; top: -60px; z-index: 100; background: #fff; padding: 10px 14px; border-radius: 8px; font-weight: 700; }
+.skip-link:focus { top: 8px; }
+:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
+.icon { width: 1.25em; height: 1.25em; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+@media (prefers-reduced-motion: reduce), ([data-reduce-motion="true"]) { *, *::before, *::after { animation: none !important; transition: none !important; } }
