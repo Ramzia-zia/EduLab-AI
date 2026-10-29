@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assistant IA – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/assistant.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header"><div><h1>Assistant IA</h1><p>Pose tes questions sur l’expérience en cours.</p></div></header>
+        <div class="form-message form-message--info" data-assistant-note hidden></div>
+        <section class="card chat" aria-label="Conversation">
+          <div id="chat-log" class="chat__log" role="log" aria-live="polite" aria-label="Historique des messages"></div>
+          <div id="typing" class="chat__typing" hidden>L’assistant est en train de répondre…</div>
+          <div id="chat-error" hidden></div>
+          <div class="chat__suggestions" id="suggestions" aria-label="Suggestions de questions"></div>
+          <div class="chat__actions">
+            <button type="button" class="btn btn--secondary btn--sm" data-intent="explain">Expliquer</button>
+            <button type="button" class="btn btn--secondary btn--sm" data-intent="hint">Donner un indice</button>
+            <button type="button" class="btn btn--secondary btn--sm" data-intent="restart">Recommencer l’expérience</button>
+          </div>
+          <form id="chat-form" class="chat__form">
+            <label for="chat-input" class="sr-only">Ton message</label>
+            <input class="field__input" id="chat-input" name="message" type="text" placeholder="Écris ton message…" autocomplete="off" maxlength="500">
+            <button class="btn btn--primary" type="submit" id="chat-send">Envoyer</button>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../js/pages/assistant.js"></script>
+</body>
+</html>

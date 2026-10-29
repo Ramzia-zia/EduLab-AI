@@ -1,0 +1,25 @@
+/* Variables : toutes les couleurs et tailles du site sont ici. On les change à UN seul endroit. */
+:root {
+  --color-primary: #5B35D5;
+  --color-primary-dark: #302078;
+  --color-primary-soft: #EFEBFD;
+  --color-white: #FFFFFF;
+  --color-bg: #F7F7FC;
+  --color-text: #17163D;
+  --color-text-muted: #5C5B7E;
+  --color-border: #E8E8F2;
+  --color-success: #15803D;
+  --color-success-soft: #DCFCE7;
+  --color-warning: #92400E;
+  --color-warning-soft: #FEF3C7;
+  --color-danger: #B91C1C;
+  --color-danger-soft: #FEE2E2;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --shadow-card: 0 2px 10px rgba(48, 32, 120, 0.07);
+  --shadow-modal: 0 20px 50px rgba(23, 22, 61, 0.3);
+  --font-main: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sidebar-width: 240px;
+  --tap-size: 44px; /* taille minimale d'une zone de clic */
+}

@@ -1,0 +1,18 @@
+/* Catalogue des simulations */
+.search-box { width: min(100%, 340px); }
+.catalog-layout { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; align-items: start; }
+.filters { display: flex; flex-direction: column; gap: 18px; position: sticky; top: 84px; }
+.filter-list { display: flex; flex-direction: column; gap: 2px; }
+.radio { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 0.9rem; cursor: pointer; }
+.radio input { width: 18px; height: 18px; accent-color: var(--color-primary); }
+.sim-card { display: flex; flex-direction: column; gap: 10px; padding: 14px; }
+.sim-card__thumb { height: 88px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: #fff; }
+.sim-card__thumb .icon { width: 36px; height: 36px; }
+.sim-card__thumb--physique { background: linear-gradient(135deg, #3B82F6, #1D4ED8); }
+.sim-card__thumb--chimie { background: linear-gradient(135deg, #14B8A6, #0F766E); }
+.sim-card__thumb--svt { background: linear-gradient(135deg, #84CC16, #3F7D1A); }
+.sim-card__thumb--mathematiques { background: linear-gradient(135deg, #EC4899, #BE185D); }
+.sim-card h3 { font-size: 0.95rem; }
+.sim-card p { font-size: 0.82rem; color: var(--color-text-muted); flex: 1; }
+.sim-card__meta { display: flex; flex-wrap: wrap; gap: 6px; }
+@media (max-width: 900px) { .catalog-layout { grid-template-columns: 1fr; } .filters { position: static; } .filter-list { flex-direction: row; flex-wrap: wrap; gap: 4px 14px; } }

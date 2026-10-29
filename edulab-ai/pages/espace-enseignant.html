@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Espace enseignant – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/enseignant.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header">
+          <div><h1>Espace enseignant</h1><p>Suis tes classes, tes élèves et les activités attribuées.</p></div>
+          <button type="button" class="btn btn--primary" id="new-activity">Nouvelle activité</button>
+        </header>
+        <div class="form-message form-message--info" data-teacher-note hidden></div>
+        <div id="teacher-state" aria-live="polite"></div>
+        <div id="teacher-body" class="stack" hidden>
+          <section class="grid grid--3" aria-label="Statistiques">
+            <article class="card"><p class="stat-card__label">Classes</p><p class="stat-card__value" id="stat-classes">–</p></article>
+            <article class="card"><p class="stat-card__label">Élèves suivis</p><p class="stat-card__value" id="stat-students">–</p></article>
+            <article class="card"><p class="stat-card__label">Élèves en difficulté (moins de 50 %)</p><p class="stat-card__value text-warning" id="stat-struggling">–</p></article>
+          </section>
+          <section class="card" aria-labelledby="students-title">
+            <div class="row row--between"><h2 class="card__title" id="students-title">Progression des élèves</h2><div class="row" id="class-filters" role="group" aria-label="Filtrer par classe"></div></div>
+            <div class="table-wrap"><table class="table"><caption class="sr-only">Résultats des élèves</caption><thead><tr><th scope="col">Élève</th><th scope="col">Classe</th><th scope="col">Matière</th><th scope="col">Progression</th><th scope="col">Statut</th><th scope="col"><span class="sr-only">Détails</span></th></tr></thead><tbody id="students-body"></tbody></table></div>
+          </section>
+          <section class="card" id="student-detail" aria-live="polite" hidden></section>
+          <div class="grid grid--2">
+            <section class="card" aria-labelledby="activities-title"><h2 class="card__title" id="activities-title">Activités attribuées</h2><ul id="activities-list" class="stack"></ul></section>
+            <section class="card" aria-labelledby="difficulties-title"><h2 class="card__title" id="difficulties-title">Difficultés fréquentes</h2><ul id="difficulties-list" class="stack"></ul></section>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../js/pages/enseignant.js"></script>
+</body>
+</html>

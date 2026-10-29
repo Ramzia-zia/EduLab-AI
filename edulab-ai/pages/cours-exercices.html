@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cours et exercices – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/cours.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header">
+          <div><h1>Cours &amp; Exercices</h1><p>Retrouve tes cours, tes exercices recommandés et tes ressources.</p></div>
+          <div class="field"><label class="field__label" for="subject-filter">Matière</label><select class="field__input" id="subject-filter"></select></div>
+        </header>
+        <div class="tabs" role="tablist" aria-label="Sections">
+          <button class="tab" role="tab" id="tab-courses" aria-controls="panel-courses" aria-selected="true">Cours</button>
+          <button class="tab" role="tab" id="tab-exercises" aria-controls="panel-exercises" aria-selected="false" tabindex="-1">Exercices</button>
+          <button class="tab" role="tab" id="tab-resources" aria-controls="panel-resources" aria-selected="false" tabindex="-1">Ressources</button>
+        </div>
+        <div id="courses-state" aria-live="polite"></div>
+        <div id="panel-courses" role="tabpanel" aria-labelledby="tab-courses" class="grid grid--2 tab-panel"></div>
+        <div id="panel-exercises" role="tabpanel" aria-labelledby="tab-exercises" class="stack tab-panel" hidden></div>
+        <div id="panel-resources" role="tabpanel" aria-labelledby="tab-resources" class="stack tab-panel" hidden></div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../js/pages/cours.js"></script>
+</body>
+</html>

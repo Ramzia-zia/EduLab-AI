@@ -1,0 +1,21 @@
+/* Interface générique d'une simulation : matériel | expérience | étapes */
+.lab-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr) 280px; gap: 16px; align-items: start; }
+.lab-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 14px; }
+.lab-toolbar__spacer { flex: 1; }
+.lab-stage { min-height: 220px; }
+.demo-sim { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-top: 12px; padding: 20px; border-radius: var(--radius-md); background: var(--color-bg); }
+.demo-sim__svg { width: 110px; height: auto; }
+.demo-sim__ph { font-size: 2.4rem; font-weight: 800; color: var(--color-primary-dark); line-height: 1.1; }
+.item-list li { padding: 10px 12px; border: 1px solid var(--color-border); border-radius: var(--radius-sm); margin-bottom: 8px; font-size: 0.875rem; }
+.item-list li small { display: block; color: var(--color-text-muted); }
+.bullet-list { list-style: disc; padding-left: 20px; font-size: 0.875rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 6px; }
+.steps { display: flex; flex-direction: column; gap: 6px; }
+.step { display: flex; gap: 12px; padding: 8px; border-radius: var(--radius-sm); font-size: 0.875rem; }
+.step.is-current { background: var(--color-primary-soft); }
+.step__num { width: 26px; height: 26px; border-radius: 50%; border: 2px solid var(--color-border); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; flex: none; }
+.step.is-done .step__num { background: var(--color-success); border-color: var(--color-success); color: #fff; }
+.step small { display: block; color: var(--color-text-muted); }
+.lab-save { margin-top: 14px; }
+@media (max-width: 1100px) { .lab-layout { grid-template-columns: minmax(0, 1fr); } .lab-layout > section { order: -1; } }
+#back-link { margin-bottom: 12px; }
+.demo-sim .btn { margin: 12px 0 8px; }

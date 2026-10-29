@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paramètres – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/parametres.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header"><div><h1>Paramètres</h1><p>Gère ton profil, ta sécurité et tes préférences.</p></div></header>
+        <div class="stack settings">
+          <section class="card" aria-labelledby="profile-title">
+            <h2 class="card__title" id="profile-title">Profil</h2>
+            <form id="profile-form" class="stack" novalidate>
+              <div class="grid grid--2">
+                <div class="field"><label class="field__label" for="firstName">Prénom</label><input class="field__input" id="firstName" name="firstName" type="text" autocomplete="given-name"></div>
+                <div class="field"><label class="field__label" for="lastName">Nom</label><input class="field__input" id="lastName" name="lastName" type="text" autocomplete="family-name"></div>
+              </div>
+              <div class="field"><label class="field__label" for="email">Adresse e-mail</label><input class="field__input" id="email" name="email" type="email" autocomplete="email"></div>
+              <div id="profile-message" hidden></div>
+              <div><button class="btn btn--primary" type="submit">Enregistrer le profil</button></div>
+            </form>
+          </section>
+          <section class="card" aria-labelledby="security-title">
+            <h2 class="card__title" id="security-title">Sécurité</h2>
+            <form id="password-form" class="stack" novalidate>
+              <div class="field"><label class="field__label" for="currentPassword">Mot de passe actuel</label><input class="field__input" id="currentPassword" name="currentPassword" type="password" autocomplete="current-password"></div>
+              <div class="grid grid--2">
+                <div class="field"><label class="field__label" for="newPassword">Nouveau mot de passe</label><input class="field__input" id="newPassword" name="newPassword" type="password" autocomplete="new-password"></div>
+                <div class="field"><label class="field__label" for="confirmPassword">Confirmer le nouveau mot de passe</label><input class="field__input" id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password"></div>
+              </div>
+              <div id="password-message" hidden></div>
+              <div><button class="btn btn--primary" type="submit">Changer le mot de passe</button></div>
+            </form>
+          </section>
+          <section class="card" aria-labelledby="prefs-title">
+            <h2 class="card__title" id="prefs-title">Mode d’utilisation</h2>
+            <form id="prefs-form" class="stack">
+              <div class="field"><label class="field__label" for="textSize">Taille du texte</label><select class="field__input" id="textSize" name="textSize"><option value="normal">Normale</option><option value="large">Grande</option></select></div>
+              <div class="field"><label class="checkbox"><input type="checkbox" id="reduceMotion" name="reduceMotion"><span>Réduire les animations</span></label></div>
+              <p class="text-muted text-small">Ces préférences sont enregistrées sur cet appareil.</p>
+            </form>
+          </section>
+          <section class="card" aria-labelledby="data-title">
+            <h2 class="card__title" id="data-title">Mes données</h2>
+            <p class="text-muted text-small" id="data-note"></p>
+            <div class="row"><button class="btn btn--secondary" type="button" id="download-data">Télécharger mes données</button><button class="btn btn--danger" type="button" id="logout-button">Se déconnecter</button></div>
+          </section>
+          <section class="card" aria-labelledby="about-title">
+            <h2 class="card__title" id="about-title">À propos</h2>
+            <p class="text-muted text-small">Version de l’application : 0.1.0 · Mode de données : <strong id="mode-label"></strong></p>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../js/pages/parametres.js"></script>
+</body>
+</html>

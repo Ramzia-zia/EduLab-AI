@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulation – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/simulation-detail.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" data-sidebar aria-label="Menu"></aside>
+    <div class="sidebar-backdrop" data-sidebar-backdrop hidden></div>
+    <div class="app-main">
+      <header class="topbar" data-topbar></header>
+      <main class="app-content" id="contenu" tabindex="-1">
+        <header class="page-header">
+          <div>
+            <a class="btn btn--secondary btn--sm" href="simulations.html" id="back-link">Retour au catalogue</a>
+            <h1 id="sim-title">Simulation</h1><p id="sim-meta"></p>
+          </div>
+        </header>
+        <div id="sim-state" aria-live="polite"></div>
+        <div class="lab-layout" id="lab" hidden>
+          <aside class="stack" aria-label="Matériel et consignes">
+            <section class="card"><h2 class="card__title">Matériel</h2><ul id="instruments-list" class="item-list"></ul></section>
+            <section class="card"><h2 class="card__title">Consignes</h2><ul id="instructions-list" class="bullet-list"></ul></section>
+          </aside>
+          <section class="stack" aria-label="Expérience">
+            <div class="card">
+              <div class="lab-toolbar" role="toolbar" aria-label="Contrôles de l’expérience">
+                <button type="button" class="btn btn--primary" data-action="start">Démarrer</button>
+                <button type="button" class="btn btn--secondary" data-action="reset">Réinitialiser</button>
+                <span class="lab-toolbar__spacer"></span>
+                <button type="button" class="btn btn--ghost" data-action="prev">Précédent</button>
+                <button type="button" class="btn btn--ghost" data-action="next">Suivant</button>
+              </div>
+              <div id="sim-error" hidden></div>
+              <div id="sim-stage" class="lab-stage"></div>
+            </div>
+            <div class="card" aria-live="polite">
+              <h2 class="card__title">Résultats et mesures</h2>
+              <ul id="measures-list" class="item-list"></ul>
+              <div class="row lab-save"><button type="button" class="btn btn--secondary" id="save-result" disabled>Enregistrer le résultat</button><span id="save-status" class="text-small"></span></div>
+            </div>
+            <div class="card chart" id="chart-card" hidden><h2 class="card__title">Graphique</h2><div id="sim-chart"></div></div>
+          </section>
+          <aside class="stack" aria-label="Étapes">
+            <section class="card"><h2 class="card__title">Étapes</h2><ol id="steps-list" class="steps"></ol></section>
+            <section class="card"><p class="stat-card__label" id="live-label">Mesure en cours</p><p class="stat-card__value" id="live-value">–</p></section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script type="module" src="../js/pages/simulation-detail.js"></script>
+</body>
+</html>

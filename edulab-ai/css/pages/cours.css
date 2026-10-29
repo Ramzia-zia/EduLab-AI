@@ -1,0 +1,10 @@
+/* Cours et exercices */
+.tab-panel { margin-top: 20px; }
+.course-card { display: flex; flex-direction: column; gap: 10px; }
+.course-card h3 { font-size: 1rem; }
+.course-card p { color: var(--color-text-muted); font-size: 0.875rem; flex: 1; }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.exercise-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.exercise-row__main { flex: 1; min-width: 200px; }
+.exercise-row__main strong { display: block; }
+.exercise-row .progress { width: 140px; }

@@ -1,0 +1,18 @@
+# Fichiers du système et de l'éditeur
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Fichiers temporaires
+*.log
+*.tmp
+node_modules/
+
+# Informations sensibles : ne JAMAIS les publier
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.*

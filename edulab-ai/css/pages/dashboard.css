@@ -1,0 +1,15 @@
+/* Tableau de bord de l'élève */
+.stat-card__value--small { font-size: 1.1rem; margin-bottom: 10px; }
+.dashboard-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 16px; }
+.subject-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--color-border); border-radius: var(--radius-md); text-decoration: none; background: #fff; transition: box-shadow 0.15s, border-color 0.15s; }
+.subject-tile:hover { border-color: var(--color-primary); box-shadow: var(--shadow-card); }
+.subject-tile strong { font-size: 0.95rem; }
+.subject-tile span.text-muted { font-size: 0.8rem; }
+.quote-card { background: linear-gradient(160deg, #3B2BB5, #302078); color: #fff; border: 0; display: flex; flex-direction: column; justify-content: flex-end; min-height: 200px; }
+.quote-card blockquote { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+.activity-list { display: flex; flex-direction: column; }
+.activity-list li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--color-border); }
+.activity-list li:first-child { border-top: 0; }
+.activity-list__main { flex: 1; min-width: 0; }
+.activity-list__main strong { display: block; }
+@media (max-width: 1024px) { .dashboard-layout { grid-template-columns: 1fr; } }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscription – EduLab AI</title>
+  <meta name="theme-color" content="#5B35D5">
+  <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/pages/inscription.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body class="auth-page">
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+  <header class="auth-header">
+    <a class="brand" href="../index.html"><img src="../assets/images/logo.svg" alt="" width="36" height="36"><span>EduLab AI</span></a>
+  </header>
+  <main class="auth-main" id="contenu" tabindex="-1">
+    <section class="card auth-card" aria-labelledby="auth-title">
+      <h1 id="auth-title">Créer un compte</h1>
+      <p class="text-muted">Rejoignez EduLab AI et commencez votre parcours</p>
+      <div class="form-message form-message--info" data-demo-note hidden></div>
+      <form id="register-form" class="stack" novalidate>
+        <fieldset class="segmented">
+          <legend class="sr-only">Je suis</legend>
+          <label><input type="radio" name="role" value="student" checked><span>Élève</span></label>
+          <label><input type="radio" name="role" value="teacher"><span>Enseignant</span></label>
+        </fieldset>
+        <div class="grid grid--2">
+        <div class="field">
+          <label class="field__label" for="lastName">Nom</label>
+          <input class="field__input" id="lastName" name="lastName" type="text" placeholder="Votre nom" autocomplete="family-name">
+        </div>
+        <div class="field">
+          <label class="field__label" for="firstName">Prénom</label>
+          <input class="field__input" id="firstName" name="firstName" type="text" placeholder="Votre prénom" autocomplete="given-name">
+        </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="email">Adresse e-mail</label>
+          <input class="field__input" id="email" name="email" type="email" placeholder="exemple@email.com" autocomplete="email">
+        </div>
+        <div data-extra-fields class="stack"></div>
+        <div class="field">
+          <label class="field__label" for="password">Mot de passe</label>
+          <div class="input-group">
+            <input class="field__input" id="password" name="password" type="password" placeholder="8 caractères minimum" autocomplete="new-password">
+            <button type="button" class="input-group__toggle" data-toggle-password="password" aria-label="Afficher le mot de passe" aria-pressed="false"></button>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field__label" for="confirmPassword">Confirmer le mot de passe</label>
+          <div class="input-group">
+            <input class="field__input" id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirmez votre mot de passe" autocomplete="new-password">
+            <button type="button" class="input-group__toggle" data-toggle-password="confirmPassword" aria-label="Afficher le mot de passe" aria-pressed="false"></button>
+          </div>
+        </div>
+        <div class="field"><label class="checkbox"><input type="checkbox" id="acceptTerms" name="acceptTerms"><span>J’accepte les <button type="button" class="link-button" id="terms-link">conditions d’utilisation</button></span></label></div>
+        <div id="form-message" hidden></div>
+        <button class="btn btn--primary btn--block" type="submit">S’inscrire</button>
+      </form>
+      <p class="auth-switch text-small">Vous avez déjà un compte ? <a href="connexion.html">Se connecter</a></p>
+    </section>
+  </main>
+  <script type="module" src="../js/pages/inscription.js"></script>
+</body>
+</html>
