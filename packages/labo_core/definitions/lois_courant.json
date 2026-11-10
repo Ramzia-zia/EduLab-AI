@@ -1,0 +1,51 @@
+{
+  "id": "lois_courant",
+  "matiere": "physique",
+  "niveau": "seconde",
+  "materiel": [
+    "alimentation",
+    "amperemetre",
+    "resistor_r1",
+    "resistor_r2",
+    "interrupteur_k",
+    "fils"
+  ],
+  "securite": [
+    {
+      "regle_id": "amperemetre_en_serie",
+      "avant": "fermer_interrupteur",
+      "exige": "amperemetre_en_serie",
+      "message": "Un ampèremètre se monte toujours en série, jamais en dérivation."
+    },
+    {
+      "regle_id": "pas_de_court_circuit",
+      "avant": "fermer_interrupteur",
+      "exige": "montage_sans_court_circuit",
+      "message": "Ne relie jamais directement les deux bornes du générateur par un simple fil."
+    },
+    {
+      "regle_id": "grand_calibre_en_premier",
+      "avant": "fermer_interrupteur",
+      "exige": "plus_grand_calibre",
+      "message": "Choisis d'abord le plus grand calibre, puis diminue-le progressivement."
+    }
+  ],
+  "conseils": [
+    {
+      "quand": "aiguille_hors_echelle",
+      "niveau": "avertissement",
+      "message": "L'aiguille dépasse l'échelle. Choisis un calibre plus grand."
+    },
+    {
+      "quand": "courants_serie_mesures",
+      "niveau": "validation",
+      "message": "Tu as mesuré l'intensité aux trois points. Compare I1, I2 et I3."
+    },
+    {
+      "quand": "derivation_mesuree",
+      "niveau": "information",
+      "message": "Tu as mesuré I0, I1 et I2. Compare I0 à la somme I1 + I2."
+    }
+  ],
+  "calcul": "electricite"
+}

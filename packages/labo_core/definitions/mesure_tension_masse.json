@@ -1,0 +1,46 @@
+{
+  "id": "mesure_tension_masse",
+  "matiere": "physique",
+  "niveau": "seconde",
+  "materiel": [
+    "alimentation",
+    "voltmetre_aiguille",
+    "multimetre",
+    "resistor_r1",
+    "resistor_r2",
+    "interrupteur_k",
+    "fils"
+  ],
+  "securite": [
+    {
+      "regle_id": "pas_de_court_circuit",
+      "avant": "fermer_interrupteur",
+      "exige": "montage_sans_court_circuit",
+      "message": "Ne relie jamais directement les deux bornes du générateur par un simple fil."
+    },
+    {
+      "regle_id": "grand_calibre_en_premier",
+      "avant": "fermer_interrupteur",
+      "exige": "plus_grand_calibre",
+      "message": "Choisis d'abord le plus grand calibre, puis diminue-le progressivement."
+    }
+  ],
+  "conseils": [
+    {
+      "quand": "aiguille_hors_echelle",
+      "niveau": "avertissement",
+      "message": "L'aiguille dépasse l'échelle. Choisis un calibre plus grand."
+    },
+    {
+      "quand": "voltmetre_en_serie",
+      "niveau": "avertissement",
+      "message": "Un voltmètre se branche en dérivation, aux bornes du dipôle."
+    },
+    {
+      "quand": "branchement_inverse",
+      "niveau": "information",
+      "message": "L'appareil affiche un signe moins : les bornes V et COM sont inversées par rapport au sens de la tension."
+    }
+  ],
+  "calcul": "electricite"
+}

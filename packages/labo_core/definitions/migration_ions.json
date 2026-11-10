@@ -1,0 +1,52 @@
+{
+  "id": "migration_ions",
+  "matiere": "physique",
+  "niveau": "seconde",
+  "materiel": [
+    "alimentation",
+    "rheostat",
+    "amperemetre",
+    "papier_filtre",
+    "electrode_a",
+    "electrode_b",
+    "cristal_sulfate_cuivre",
+    "cristal_permanganate",
+    "gants",
+    "spatule",
+    "interrupteur_k",
+    "fils"
+  ],
+  "securite": [
+    {
+      "regle_id": "gants_avant_cristaux",
+      "avant": "deposer_cristal",
+      "exige": "gants",
+      "message": "Le permanganate de potassium tache la peau et les vêtements. Mets d'abord tes gants."
+    },
+    {
+      "regle_id": "pas_de_court_circuit",
+      "avant": "fermer_interrupteur",
+      "exige": "montage_sans_court_circuit",
+      "message": "Ne relie jamais directement les deux bornes du générateur par un simple fil."
+    },
+    {
+      "regle_id": "grand_calibre_en_premier",
+      "avant": "fermer_interrupteur",
+      "exige": "plus_grand_calibre",
+      "message": "Choisis d'abord le plus grand calibre, puis diminue-le progressivement."
+    }
+  ],
+  "conseils": [
+    {
+      "quand": "courant_nul",
+      "niveau": "avertissement",
+      "message": "Aucun courant ne passe. Vérifie que K est fermé et que le circuit est complet."
+    },
+    {
+      "quand": "duree_observation_atteinte",
+      "niveau": "information",
+      "message": "Dix minutes se sont écoulées. Tu peux ouvrir K et observer la position des taches."
+    }
+  ],
+  "calcul": "migration_ions"
+}

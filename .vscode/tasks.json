@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Analyser et tester labo_core",
+			"type": "shell",
+			"command": "cmd.exe",
+			"args": [
+				"/c",
+				"cd /d \"R:\\Simulations\\packages\\labo_core\" && dart --version && dart analyze && dart run test/tous_test.dart"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

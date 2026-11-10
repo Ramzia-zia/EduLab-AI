@@ -1,0 +1,553 @@
+{
+  "version": 1,
+  "description": "Valeurs de reference lues par pytest et par flutter test. En cas de desaccord, ce fichier arbitre.",
+  "cas": [
+    {
+      "id": "titrage_volume_equivalent",
+      "entrees": {
+        "ca_mol_l": 0.08,
+        "va_ml": 20.0,
+        "cb_mol_l": 0.1
+      },
+      "sortie": {
+        "volume_equivalent_ml": 16.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "titrage_ph_0_0_ml",
+      "entrees": {
+        "ca_mol_l": 0.08,
+        "va_ml": 20.0,
+        "cb_mol_l": 0.1,
+        "volume_verse_ml": 0.0
+      },
+      "sortie": {
+        "ph": 1.1
+      },
+      "tolerance": 0.02
+    },
+    {
+      "id": "titrage_ph_15_99_ml",
+      "entrees": {
+        "ca_mol_l": 0.08,
+        "va_ml": 20.0,
+        "cb_mol_l": 0.1,
+        "volume_verse_ml": 15.99
+      },
+      "sortie": {
+        "ph": 4.56
+      },
+      "tolerance": 0.02
+    },
+    {
+      "id": "titrage_ph_16_0_ml",
+      "entrees": {
+        "ca_mol_l": 0.08,
+        "va_ml": 20.0,
+        "cb_mol_l": 0.1,
+        "volume_verse_ml": 16.0
+      },
+      "sortie": {
+        "ph": 7.0
+      },
+      "tolerance": 0.02
+    },
+    {
+      "id": "titrage_ph_16_05_ml",
+      "entrees": {
+        "ca_mol_l": 0.08,
+        "va_ml": 20.0,
+        "cb_mol_l": 0.1,
+        "volume_verse_ml": 16.05
+      },
+      "sortie": {
+        "ph": 10.14
+      },
+      "tolerance": 0.02
+    },
+    {
+      "id": "pendule_periode",
+      "entrees": {
+        "duree_s": 20.1,
+        "oscillations": 10
+      },
+      "sortie": {
+        "periode_s": 2.01
+      },
+      "tolerance": 0.005
+    },
+    {
+      "id": "pendule_g",
+      "entrees": {
+        "longueur_m": 1.0,
+        "periode_s": 2.01
+      },
+      "sortie": {
+        "g_m_s2": 9.77
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "pendule_periode_fil_court",
+      "entrees": {
+        "longueur_m": 0.25,
+        "g_m_s2": 9.77
+      },
+      "sortie": {
+        "periode_s": 1.01
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "affaissement_mesure",
+      "entrees": {
+        "hauteur_cone_mm": 300,
+        "hauteur_beton_mm": 220
+      },
+      "sortie": {
+        "affaissement_mm": 80,
+        "classe": "S2"
+      },
+      "tolerance": 0
+    },
+    {
+      "id": "affaissement_classe_130",
+      "entrees": {
+        "affaissement_mm": 130
+      },
+      "sortie": {
+        "classe": "S3"
+      },
+      "tolerance": 0
+    },
+    {
+      "id": "ph_melange_acide_5ml",
+      "entrees": {
+        "eau_ml": 50,
+        "acide_ml": 5,
+        "base_ml": 0,
+        "conc_mol_l": 0.001
+      },
+      "sortie": {
+        "ph": 4.04
+      },
+      "tolerance": 0.02
+    },
+    {
+      "id": "ph_melange_neutre",
+      "entrees": {
+        "eau_ml": 50,
+        "acide_ml": 8.3,
+        "base_ml": 8.3,
+        "conc_mol_l": 0.001
+      },
+      "sortie": {
+        "ph": 7.0
+      },
+      "tolerance": 0.05
+    },
+    {
+      "id": "electricite_serie_resistance",
+      "entrees": {
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "resistance_ohm": 250
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_derivation_resistance",
+      "entrees": {
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "resistance_ohm": 60
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_serie_intensite_6v",
+      "entrees": {
+        "tension_generateur_v": 6,
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "intensite_a": 0.024
+      },
+      "tolerance": 1e-05
+    },
+    {
+      "id": "electricite_derivation_courants_6v",
+      "entrees": {
+        "tension_generateur_v": 6,
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "i0_a": 0.1,
+        "i1_a": 0.06,
+        "i2_a": 0.04
+      },
+      "tolerance": 1e-05
+    },
+    {
+      "id": "electricite_serie_tensions_6v",
+      "entrees": {
+        "tension_generateur_v": 6,
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "u_pa_v": 2.4,
+        "u_an_v": 3.6,
+        "u_pn_v": 6.0
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_serie_tensions_4_5v",
+      "entrees": {
+        "tension_generateur_v": 4.5,
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "u_pa_v": 1.8,
+        "u_an_v": 2.7,
+        "u_pn_v": 4.5
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_masse_potentiels_4_5v",
+      "entrees": {
+        "tension_generateur_v": 4.5,
+        "r1_ohm": 100,
+        "r2_ohm": 150
+      },
+      "sortie": {
+        "potentiel_p_v": 4.5,
+        "potentiel_a_v": 2.7,
+        "potentiel_n_v": 0.0
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_derivation_tensions_6v",
+      "entrees": {
+        "tension_generateur_v": 6
+      },
+      "sortie": {
+        "u_pn_v": 6.0,
+        "u1_v": 6.0,
+        "u2_v": 6.0
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_interrupteur_ouvert_6v",
+      "entrees": {
+        "tension_generateur_v": 6,
+        "ferme": false
+      },
+      "sortie": {
+        "tension_interrupteur_v": 6.0
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_interrupteur_ferme_6v",
+      "entrees": {
+        "tension_generateur_v": 6,
+        "ferme": true
+      },
+      "sortie": {
+        "tension_interrupteur_v": 0.0
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_voltmetre_branchement_normal",
+      "entrees": {
+        "potentiel_borne_v_v": 6.0,
+        "potentiel_borne_com_v": 3.6
+      },
+      "sortie": {
+        "tension_mesuree_v": 2.4
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_voltmetre_branchement_inverse",
+      "entrees": {
+        "potentiel_borne_v_v": 3.6,
+        "potentiel_borne_com_v": 6.0
+      },
+      "sortie": {
+        "tension_mesuree_v": -2.4
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "electricite_aiguille_calibre_0_1a",
+      "entrees": {
+        "intensite_a": 0.024,
+        "calibre_a": 0.1,
+        "divisions_total": 100
+      },
+      "sortie": {
+        "lecture_div": 24.0,
+        "hors_echelle": false
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "electricite_aiguille_calibre_0_3a",
+      "entrees": {
+        "intensite_a": 0.024,
+        "calibre_a": 0.3,
+        "divisions_total": 100
+      },
+      "sortie": {
+        "lecture_div": 8.0,
+        "hors_echelle": false
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "electricite_aiguille_pleine_echelle",
+      "entrees": {
+        "intensite_a": 0.1,
+        "calibre_a": 0.1,
+        "divisions_total": 100
+      },
+      "sortie": {
+        "lecture_div": 100.0,
+        "hors_echelle": false
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "electricite_intensite_depuis_lecture",
+      "entrees": {
+        "calibre_a": 0.1,
+        "lecture_div": 24,
+        "divisions_total": 100
+      },
+      "sortie": {
+        "intensite_a": 0.024
+      },
+      "tolerance": 1e-05
+    },
+    {
+      "id": "electricite_incertitude_calibre_0_1a",
+      "entrees": {
+        "classe": 1.5,
+        "calibre_a": 0.1,
+        "intensite_a": 0.024
+      },
+      "sortie": {
+        "delta_i_a": 0.0015,
+        "tau": 0.0625
+      },
+      "tolerance": 1e-05
+    },
+    {
+      "id": "electricite_incertitude_calibre_0_3a",
+      "entrees": {
+        "classe": 1.5,
+        "calibre_a": 0.3,
+        "intensite_a": 0.024
+      },
+      "sortie": {
+        "delta_i_a": 0.0045,
+        "tau": 0.1875
+      },
+      "tolerance": 1e-05
+    },
+    {
+      "id": "optique_bilbermann_foyer",
+      "entrees": {
+        "position_objet_cm": 35,
+        "position_lentille_cm": 50
+      },
+      "sortie": {
+        "f_prime_cm": 15.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "optique_bessel_foyer",
+      "entrees": {
+        "distance_objet_ecran_cm": 80,
+        "ecart_positions_cm": 40
+      },
+      "sortie": {
+        "f_prime_cm": 15.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "optique_bessel_positions",
+      "entrees": {
+        "distance_objet_ecran_cm": 80,
+        "f_prime_cm": 15
+      },
+      "sortie": {
+        "existe": true,
+        "position_l1_cm": 20.0,
+        "position_l2_cm": 60.0,
+        "ecart_positions_cm": 40.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "optique_bessel_impossible",
+      "entrees": {
+        "distance_objet_ecran_cm": 50,
+        "f_prime_cm": 15
+      },
+      "sortie": {
+        "existe": false
+      },
+      "tolerance": 0
+    },
+    {
+      "id": "optique_descartes_oa_moins_30",
+      "entrees": {
+        "oa_cm": -30,
+        "f_prime_cm": 15
+      },
+      "sortie": {
+        "oa_prime_cm": 30.0,
+        "grandissement": -1.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "optique_descartes_oa_moins_20",
+      "entrees": {
+        "oa_cm": -20,
+        "f_prime_cm": 15
+      },
+      "sortie": {
+        "oa_prime_cm": 60.0,
+        "grandissement": -3.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "optique_descartes_oa_moins_60",
+      "entrees": {
+        "oa_cm": -60,
+        "f_prime_cm": 15
+      },
+      "sortie": {
+        "oa_prime_cm": 20.0,
+        "grandissement": -0.3333
+      },
+      "tolerance": 0.001
+    },
+    {
+      "id": "optique_descartes_foyer",
+      "entrees": {
+        "oa_cm": -30,
+        "oa_prime_cm": 30
+      },
+      "sortie": {
+        "f_prime_cm": 15.0
+      },
+      "tolerance": 0.01
+    },
+    {
+      "id": "optique_vergence",
+      "entrees": {
+        "f_prime_cm": 15
+      },
+      "sortie": {
+        "vergence_dioptries": 6.6667
+      },
+      "tolerance": 0.001
+    },
+    {
+      "id": "optique_statistiques",
+      "entrees": {
+        "valeurs_cm": [
+          14.8,
+          15.1,
+          15.0
+        ]
+      },
+      "sortie": {
+        "moyenne_cm": 14.9667,
+        "ecart_type_cm": 0.1528
+      },
+      "tolerance": 0.001
+    },
+    {
+      "id": "oscilloscope_tension_continue",
+      "entrees": {
+        "sensibilite_v_par_div": 2,
+        "deviation_div": 3
+      },
+      "sortie": {
+        "tension_v": 6.0
+      },
+      "tolerance": 0.0001
+    },
+    {
+      "id": "oscilloscope_sinus_200hz",
+      "entrees": {
+        "sensibilite_v_par_div": 2,
+        "base_temps_s_par_div": 0.001,
+        "divisions_par_periode": 5,
+        "divisions_sommet": 3
+      },
+      "sortie": {
+        "periode_s": 0.005,
+        "frequence_hz": 200.0,
+        "valeur_maximale_v": 6.0,
+        "valeur_efficace_v": 4.2426
+      },
+      "tolerance": 0.001
+    },
+    {
+      "id": "oscilloscope_frequence_doublee",
+      "entrees": {
+        "frequence_hz": 400,
+        "base_temps_s_par_div": 0.001
+      },
+      "sortie": {
+        "divisions_par_periode": 2.5
+      },
+      "tolerance": 0.001
+    },
+    {
+      "id": "migration_ion_cuivre",
+      "entrees": {
+        "charge_elementaire": 2
+      },
+      "sortie": {
+        "electrode": "cathode",
+        "meme_sens_que_courant_conventionnel": true
+      },
+      "tolerance": 0
+    },
+    {
+      "id": "migration_ion_permanganate",
+      "entrees": {
+        "charge_elementaire": -1
+      },
+      "sortie": {
+        "electrode": "anode",
+        "meme_sens_que_courant_conventionnel": false
+      },
+      "tolerance": 0
+    }
+  ]
+}

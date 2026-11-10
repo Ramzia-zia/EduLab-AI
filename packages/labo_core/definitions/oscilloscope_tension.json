@@ -1,0 +1,38 @@
+{
+  "id": "oscilloscope_tension",
+  "matiere": "physique",
+  "niveau": "seconde",
+  "materiel": [
+    "alimentation",
+    "gbf",
+    "oscilloscope",
+    "multimetre",
+    "fils"
+  ],
+  "securite": [
+    {
+      "regle_id": "masse_commune",
+      "avant": "mesurer",
+      "exige": "masse_commune",
+      "message": "Relie d'abord la masse du générateur à la masse de l'oscilloscope."
+    }
+  ],
+  "conseils": [
+    {
+      "quand": "reference_non_reglee",
+      "niveau": "information",
+      "message": "Place le commutateur sur GND et amène la trace sur la ligne de référence (u = 0)."
+    },
+    {
+      "quand": "trace_hors_ecran",
+      "niveau": "avertissement",
+      "message": "La trace sort de l'écran. Choisis une sensibilité verticale plus grande (V/div)."
+    },
+    {
+      "quand": "sensibilite_reductible",
+      "niveau": "information",
+      "message": "Tu peux choisir une sensibilité plus petite : la trace restera visible et la lecture sera plus précise."
+    }
+  ],
+  "calcul": "oscilloscope"
+}

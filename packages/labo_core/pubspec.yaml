@@ -1,0 +1,7 @@
+name: labo_core
+description: Calculs et règles des simulations EduLab AI. Dart pur, sans Flutter.
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
