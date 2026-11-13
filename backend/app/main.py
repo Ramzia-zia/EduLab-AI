@@ -1,10 +1,12 @@
 from fastapi import APIRouter, FastAPI
 
+from app.erreurs import installer_gestion_erreurs
 from app.schemas.sante import SanteReponse
 
 PREFIXE_API = "/api/v1"
 
 app = FastAPI(title="EduLab AI", version="0.1.0")
+installer_gestion_erreurs(app)
 
 routeur_public = APIRouter(prefix=PREFIXE_API)
 
