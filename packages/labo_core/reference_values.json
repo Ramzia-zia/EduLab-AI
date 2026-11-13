@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "description": "Valeurs de reference lues par pytest et par flutter test. En cas de desaccord, ce fichier arbitre.",
+  "cas": [
+    {"id": "titrage_volume_equivalent", "entrees": {"ca_mol_l": 0.08, "va_ml": 20.0, "cb_mol_l": 0.1}, "sortie": {"volume_equivalent_ml": 16.0}, "tolerance": 0.01},
+    {"id": "titrage_ph_0_0_ml", "entrees": {"ca_mol_l": 0.08, "va_ml": 20.0, "cb_mol_l": 0.1, "volume_verse_ml": 0.0}, "sortie": {"ph": 1.1}, "tolerance": 0.02},
+    {"id": "titrage_ph_15_99_ml", "entrees": {"ca_mol_l": 0.08, "va_ml": 20.0, "cb_mol_l": 0.1, "volume_verse_ml": 15.99}, "sortie": {"ph": 4.56}, "tolerance": 0.02},
+    {"id": "titrage_ph_16_0_ml", "entrees": {"ca_mol_l": 0.08, "va_ml": 20.0, "cb_mol_l": 0.1, "volume_verse_ml": 16.0}, "sortie": {"ph": 7.0}, "tolerance": 0.02},
+    {"id": "titrage_ph_16_05_ml", "entrees": {"ca_mol_l": 0.08, "va_ml": 20.0, "cb_mol_l": 0.1, "volume_verse_ml": 16.05}, "sortie": {"ph": 10.14}, "tolerance": 0.02},
+    {"id": "pendule_periode", "entrees": {"duree_s": 20.1, "oscillations": 10}, "sortie": {"periode_s": 2.01}, "tolerance": 0.005},
+    {"id": "pendule_g", "entrees": {"longueur_m": 1.0, "periode_s": 2.01}, "sortie": {"g_m_s2": 9.77}, "tolerance": 0.01},
+    {"id": "pendule_periode_fil_court", "entrees": {"longueur_m": 0.25, "g_m_s2": 9.77}, "sortie": {"periode_s": 1.01}, "tolerance": 0.01},
+    {"id": "affaissement_mesure", "entrees": {"hauteur_cone_mm": 300, "hauteur_beton_mm": 220}, "sortie": {"affaissement_mm": 80, "classe": "S2"}, "tolerance": 0},
+    {"id": "affaissement_classe_130", "entrees": {"affaissement_mm": 130}, "sortie": {"classe": "S3"}, "tolerance": 0},
+    {"id": "ph_melange_acide_5ml", "entrees": {"eau_ml": 50, "acide_ml": 5, "base_ml": 0, "conc_mol_l": 0.001}, "sortie": {"ph": 4.04}, "tolerance": 0.02},
+    {"id": "ph_melange_neutre", "entrees": {"eau_ml": 50, "acide_ml": 8.3, "base_ml": 8.3, "conc_mol_l": 0.001}, "sortie": {"ph": 7.0}, "tolerance": 0.05}
+  ]
+}
