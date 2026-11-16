@@ -1,5 +1,7 @@
 from uuid import uuid4
 
+import pytest
+
 from fastapi.testclient import TestClient
 
 from app.auth import fournir_verificateur
@@ -83,9 +85,14 @@ def installer(jeton_utilisateur_id):
     return depot
 
 
-app.dependency_overrides[fournir_verificateur] = lambda: faux_verificateur
-app.dependency_overrides[fournir_depot_sync] = fournir_faux_depot
 client = TestClient(app, raise_server_exceptions=False)
+
+
+@pytest.fixture(autouse=True)
+def installer_overrides():
+    app.dependency_overrides[fournir_verificateur] = lambda: faux_verificateur
+    app.dependency_overrides[fournir_depot_sync] = fournir_faux_depot
+    yield
 
 
 def nouveau_depot():
