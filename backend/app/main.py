@@ -1,7 +1,7 @@
 from fastapi import APIRouter, FastAPI
 
 from app.erreurs import installer_gestion_erreurs
-from app.routers import assistant, tentatives, moi
+from app.routers import assistant, tentatives, moi, experiences
 from app.schemas.sante import SanteReponse
 
 PREFIXE_API = "/api/v1"
@@ -25,3 +25,4 @@ app.include_router(routeur_public)
 app.include_router(tentatives.routeur, prefix=PREFIXE_API)
 app.include_router(assistant.routeur, prefix=PREFIXE_API)
 app.include_router(moi.routeur, prefix=PREFIXE_API)
+app.include_router(experiences.routeur, prefix=PREFIXE_API)
