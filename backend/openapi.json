@@ -1,0 +1,556 @@
+{
+  "components": {
+    "schemas": {
+      "AssistantDemande": {
+        "properties": {
+          "derniere_erreur": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Erreur"
+          },
+          "etat_experience": {
+            "additionalProperties": true,
+            "title": "Etat Experience",
+            "type": "object"
+          },
+          "experience_id": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Experience Id",
+            "type": "string"
+          },
+          "historique": {
+            "items": {
+              "$ref": "#/components/schemas/MessageHistorique"
+            },
+            "maxItems": 6,
+            "title": "Historique",
+            "type": "array"
+          },
+          "message": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "niveau_indice": {
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Niveau Indice",
+            "type": "integer"
+          },
+          "tentative_id": {
+            "format": "uuid",
+            "title": "Tentative Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "experience_id",
+          "tentative_id",
+          "niveau_indice",
+          "message"
+        ],
+        "title": "AssistantDemande",
+        "type": "object"
+      },
+      "AssistantReponse": {
+        "properties": {
+          "niveau_indice": {
+            "title": "Niveau Indice",
+            "type": "integer"
+          },
+          "reponse": {
+            "title": "Reponse",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "ia",
+              "regles"
+            ],
+            "title": "Source",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reponse",
+          "niveau_indice",
+          "source"
+        ],
+        "title": "AssistantReponse",
+        "type": "object"
+      },
+      "EvenementSync": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "horodatage": {
+            "format": "date-time",
+            "title": "Horodatage",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "rang": {
+            "minimum": 1.0,
+            "title": "Rang",
+            "type": "integer"
+          },
+          "tentative_id": {
+            "format": "uuid",
+            "title": "Tentative Id",
+            "type": "string"
+          },
+          "valeurs": {
+            "additionalProperties": true,
+            "title": "Valeurs",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "tentative_id",
+          "rang",
+          "horodatage",
+          "action"
+        ],
+        "title": "EvenementSync",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "MessageHistorique": {
+        "properties": {
+          "contenu": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Contenu",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "eleve",
+              "assistant"
+            ],
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "contenu"
+        ],
+        "title": "MessageHistorique",
+        "type": "object"
+      },
+      "MoiReponse": {
+        "properties": {
+          "etablissement_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etablissement Id"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "nom": {
+            "title": "Nom",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "eleve",
+              "enseignant",
+              "etablissement",
+              "ministere"
+            ],
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nom",
+          "role"
+        ],
+        "title": "MoiReponse",
+        "type": "object"
+      },
+      "ResultatSync": {
+        "properties": {
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Code"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "statut": {
+            "enum": [
+              "accepte",
+              "refuse",
+              "deja_recu"
+            ],
+            "title": "Statut",
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "tentative",
+              "evenement"
+            ],
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type",
+          "statut"
+        ],
+        "title": "ResultatSync",
+        "type": "object"
+      },
+      "SanteReponse": {
+        "properties": {
+          "etat": {
+            "title": "Etat",
+            "type": "string"
+          }
+        },
+        "required": [
+          "etat"
+        ],
+        "title": "SanteReponse",
+        "type": "object"
+      },
+      "SyncLot": {
+        "properties": {
+          "evenements": {
+            "items": {
+              "$ref": "#/components/schemas/EvenementSync"
+            },
+            "title": "Evenements",
+            "type": "array"
+          },
+          "tentatives": {
+            "items": {
+              "$ref": "#/components/schemas/TentativeSync"
+            },
+            "title": "Tentatives",
+            "type": "array"
+          }
+        },
+        "title": "SyncLot",
+        "type": "object"
+      },
+      "SyncReponse": {
+        "properties": {
+          "resultats": {
+            "items": {
+              "$ref": "#/components/schemas/ResultatSync"
+            },
+            "title": "Resultats",
+            "type": "array"
+          }
+        },
+        "required": [
+          "resultats"
+        ],
+        "title": "SyncReponse",
+        "type": "object"
+      },
+      "TentativeSync": {
+        "properties": {
+          "debut": {
+            "format": "date-time",
+            "title": "Debut",
+            "type": "string"
+          },
+          "experience_id": {
+            "title": "Experience Id",
+            "type": "string"
+          },
+          "fin": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resultat"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "maximum": 100.0,
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          },
+          "statut": {
+            "enum": [
+              "en_cours",
+              "terminee",
+              "abandonnee"
+            ],
+            "title": "Statut",
+            "type": "string"
+          },
+          "version_experience": {
+            "minimum": 1.0,
+            "title": "Version Experience",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "experience_id",
+          "version_experience",
+          "debut",
+          "statut"
+        ],
+        "title": "TentativeSync",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    }
+  },
+  "info": {
+    "title": "EduLab AI",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/api/v1/assistant": {
+      "post": {
+        "description": "Pose une question a l'assistant. Limite : 10 questions par minute et par eleve. Reponse de 120 mots au plus. Le corrige de l'exercice n'est jamais envoye a l'IA. Si l'IA ne repond pas, la reponse vient des regles de secours (source = regles).",
+        "operationId": "poser_question_api_v1_assistant_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantDemande"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantReponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Poser Question",
+        "tags": [
+          "assistant"
+        ]
+      }
+    },
+    "/api/v1/moi": {
+      "get": {
+        "description": "Renvoie le profil de la personne connectee. Le role du jeton doit etre le meme que le role de la table profil, sinon 403.",
+        "operationId": "moi_api_v1_moi_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MoiReponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Moi",
+        "tags": [
+          "profil"
+        ]
+      }
+    },
+    "/api/v1/sante": {
+      "get": {
+        "description": "Indique que le serveur repond. Aucun jeton n'est demande.",
+        "operationId": "sante_api_v1_sante_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SanteReponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Sante"
+      }
+    },
+    "/api/v1/tentatives/sync": {
+      "post": {
+        "description": "Recoit au plus 50 elements (tentatives et evenements ensemble) envoyes par le telephone et repond element par element : accepte, refuse (avec un code) ou deja_recu. Un evenement deja recu n'est jamais ecrit deux fois.",
+        "operationId": "synchroniser_api_v1_tentatives_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SyncLot"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncReponse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Synchroniser",
+        "tags": [
+          "tentatives"
+        ]
+      }
+    }
+  }
+}
