@@ -159,3 +159,11 @@ Definitions proposees (0.2, a confirmer) : eleve actif = au moins une tentative 
 - Un enseignant voit les lignes des eleves de ses classes.
 - Un etablissement voit les lignes de son etablissement.
 - Un ministere ne lit que vue_stats_etablissement.
+### Mise à jour : Routes Web (Enseignant, Établissement, Ministère)
+
+| Méthode et chemin | Rôles | Entrée | Sortie |
+|---|---|---|---|
+| GET /classes | enseignant, etablissement | rien | liste de Classe |
+| GET /classes/{id}/resultats | enseignant, etablissement | rien | ResultatsClasse |
+| POST /etablissements/{id}/import | etablissement | fichier CSV | ImportReponse |
+| GET /stats/etablissements | ministere | rien | liste de StatEtablissement |
