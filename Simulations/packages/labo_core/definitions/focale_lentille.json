@@ -1,0 +1,39 @@
+{
+  "id": "focale_lentille",
+  "matiere": "physique",
+  "niveau": "premiere",
+  "materiel": [
+    "banc_optique",
+    "lentille_convergente",
+    "ecran",
+    "source_lumineuse",
+    "objet_lumineux",
+    "miroir_plan",
+    "cherche_foyer",
+    "reglet"
+  ],
+  "securite": [],
+  "conseils": [
+    {
+      "quand": "autocollimation_sans_miroir",
+      "niveau": "avertissement",
+      "message": "Place le miroir plan juste derrière la lentille."
+    },
+    {
+      "quand": "bessel_distance_insuffisante",
+      "niveau": "avertissement",
+      "message": "Pour la méthode de Bessel, il faut D > 4f'. Éloigne l'écran de l'objet."
+    },
+    {
+      "quand": "image_nette_obtenue",
+      "niveau": "information",
+      "message": "L'image est nette. Lis les positions sur le banc."
+    },
+    {
+      "quand": "trois_methodes_terminees",
+      "niveau": "validation",
+      "message": "Tu as trois valeurs de f'. Compare-les dans le tableau de conclusion."
+    }
+  ],
+  "calcul": "optique"
+}

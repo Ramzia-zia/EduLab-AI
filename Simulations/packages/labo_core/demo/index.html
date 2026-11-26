@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>EduLab AI : laboratoires</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Liste des expériences -->
+  <section id="liste" class="ecran">
+    <div class="marque"><span class="logo">EL</span><b>EduLab AI</b></div>
+    <h1>Expériences</h1>
+    <p class="sous">Choisis une expérience et manipule en 3D.</p>
+    <input id="recherche" type="search" placeholder="Rechercher une expérience" aria-label="Rechercher">
+    <div id="filtres" class="pastilles"></div>
+    <div id="cartes"></div>
+  </section>
+
+  <!-- Laboratoire -->
+  <section id="labo" class="ecran" hidden>
+    <header class="entete">
+      <button id="retour" class="icone" aria-label="Retour à la liste">‹</button>
+      <div><h1 id="titre"></h1><p id="meta" class="sous"></p></div>
+    </header>
+
+    <h2 class="etiq">Matériel</h2>
+    <div id="materiel" class="pastilles defile"></div>
+
+    <div id="alerte" class="alerte" role="alert" hidden></div>
+
+    <article class="carte">
+      <div class="carte-tete"><h2>Manipulation</h2><span id="badge" class="badge"></span></div>
+      <div id="scene" class="scene">
+        <div id="vue3d" class="vue3d"></div>
+        <div id="flottants" class="flottants"></div>
+        <button id="agrandir" class="agrandir" type="button" aria-label="Plein écran">Plein écran</button>
+        <div id="mini" class="mini" hidden></div>
+        <div id="tags" class="tags" hidden></div>
+      </div>
+      <div id="vues" class="vues"></div>
+      <div id="commandes"></div>
+    </article>
+
+    <article class="assistant"><b>Assistant</b><p id="conseil"></p><button id="indice-suivant" class="btn" type="button" hidden>Indice suivant</button></article>
+
+    <div id="appareils"></div>
+
+    <details class="carte" id="notes"><summary>Noter une mesure</summary><div id="notes-corps"></div></details>
+
+    <div class="actions">
+      <button id="refaire" class="sec" type="button">Refaire</button>
+      <button id="terminer" class="prim" type="button">Terminer · voir le bilan</button>
+    </div>
+  </section>
+
+  <!-- Feuille : emplacement du matériel -->
+  <div id="feuille" class="voile" hidden><div class="feuille"><h3 id="feuille-titre"></h3><div id="feuille-corps" class="pastilles"></div><button id="feuille-ok" class="sec" type="button">Fermer</button></div></div>
+
+  <!-- Bilan -->
+  <div id="bilan" class="voile" hidden><div class="feuille grande"><div id="bilan-corps"></div><div class="actions"><button id="bilan-refaire" class="sec" type="button">Refaire</button><button id="bilan-ok" class="prim" type="button">Fermer</button></div></div></div>
+</div>
+<script src="definitions.js"></script>
+<script src="labo_core.js"></script>
+<script src="scene3d.js"></script>
+<script src="banc_modele.js"></script>
+<script src="banc_interactif.js"></script>
+<script src="banc_ui.js"></script>
+<script src="gestes.js"></script>
+<script src="dosage_modele.js"></script>
+<script src="dosage_spec.js"></script>
+<script src="electricite_spec.js"></script>
+<script src="oscillo_spec.js"></script>
+<script src="labos3_spec.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

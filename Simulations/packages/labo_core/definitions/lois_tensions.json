@@ -1,0 +1,45 @@
+{
+  "id": "lois_tensions",
+  "matiere": "physique",
+  "niveau": "seconde",
+  "materiel": [
+    "alimentation",
+    "voltmetre",
+    "resistor_r1",
+    "resistor_r2",
+    "interrupteur_k",
+    "fils"
+  ],
+  "securite": [
+    {
+      "regle_id": "pas_de_court_circuit",
+      "avant": "fermer_interrupteur",
+      "exige": "montage_sans_court_circuit",
+      "message": "Ne relie jamais directement les deux bornes du générateur par un simple fil."
+    },
+    {
+      "regle_id": "grand_calibre_en_premier",
+      "avant": "fermer_interrupteur",
+      "exige": "plus_grand_calibre",
+      "message": "Choisis d'abord le plus grand calibre, puis diminue-le progressivement."
+    }
+  ],
+  "conseils": [
+    {
+      "quand": "voltmetre_en_serie",
+      "niveau": "avertissement",
+      "message": "Un voltmètre se branche en dérivation, aux bornes du dipôle."
+    },
+    {
+      "quand": "somme_tensions_mesurees",
+      "niveau": "information",
+      "message": "Tu as mesuré U_PA, U_AN et U_PN. Compare U_PA + U_AN à U_PN."
+    },
+    {
+      "quand": "tensions_derivation_mesurees",
+      "niveau": "information",
+      "message": "Tu as mesuré U_PN, U1 et U2. Compare ces trois tensions."
+    }
+  ],
+  "calcul": "electricite"
+}

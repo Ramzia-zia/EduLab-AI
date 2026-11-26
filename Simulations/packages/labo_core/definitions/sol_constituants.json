@@ -1,0 +1,25 @@
+{
+  "id": "sol_constituants",
+  "matiere": "svt",
+  "niveau": "seconde",
+  "materiel": [
+    "bocal",
+    "regle_graduee",
+    "terre",
+    "eau"
+  ],
+  "securite": [],
+  "conseils": [
+    {
+      "quand": "agitation_a_faire",
+      "niveau": "avertissement",
+      "message": "Ferme le bocal et secoue-le vigoureusement pendant 3 minutes."
+    },
+    {
+      "quand": "couches_visibles",
+      "niveau": "information",
+      "message": "Les couches sont bien séparées. Mesure la hauteur de chaque couche et celle de la terre totale."
+    }
+  ],
+  "calcul": "svt_sol"
+}

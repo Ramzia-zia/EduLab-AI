@@ -1,0 +1,2 @@
+{ "name": "labo3d", "private": true, "scripts": { "build": "esbuild scene3d.js --bundle --minify --format=iife --outfile=../demo/scene3d.js" },
+  "devDependencies": { "esbuild": "^0.25.0", "three": "^0.170.0" } }
