@@ -1,0 +1,9 @@
+
+# Fichiers générés par Flutter
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+local.properties
+*.dill
