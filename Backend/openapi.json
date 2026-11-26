@@ -1,0 +1,1942 @@
+{
+  "components": {
+    "schemas": {
+      "BilanClasse": {
+        "properties": {
+          "classe_id": {
+            "format": "uuid",
+            "title": "Classe Id",
+            "type": "string"
+          },
+          "nombre_eleves": {
+            "title": "Nombre Eleves",
+            "type": "integer"
+          },
+          "nombre_tentatives": {
+            "title": "Nombre Tentatives",
+            "type": "integer"
+          },
+          "nombre_tentatives_terminees": {
+            "title": "Nombre Tentatives Terminees",
+            "type": "integer"
+          },
+          "par_experience": {
+            "items": {
+              "$ref": "#/components/schemas/BilanExperience"
+            },
+            "title": "Par Experience",
+            "type": "array"
+          },
+          "score_moyen": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Moyenne des scores connus, arrondie à 2 décimales",
+            "title": "Score Moyen"
+          }
+        },
+        "required": [
+          "classe_id",
+          "nombre_eleves",
+          "nombre_tentatives",
+          "nombre_tentatives_terminees",
+          "par_experience"
+        ],
+        "title": "BilanClasse",
+        "type": "object"
+      },
+      "BilanExperience": {
+        "properties": {
+          "experience_id": {
+            "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+            "title": "Experience Id",
+            "type": "string"
+          },
+          "matiere": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matiere"
+          },
+          "nombre_tentatives": {
+            "title": "Nombre Tentatives",
+            "type": "integer"
+          },
+          "score_moyen": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Moyen"
+          },
+          "titre": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Titre"
+          }
+        },
+        "required": [
+          "experience_id",
+          "nombre_tentatives"
+        ],
+        "title": "BilanExperience",
+        "type": "object"
+      },
+      "ClasseResume": {
+        "properties": {
+          "enseignant_id": {
+            "format": "uuid",
+            "title": "Enseignant Id",
+            "type": "string"
+          },
+          "etablissement_id": {
+            "format": "uuid",
+            "title": "Etablissement Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "niveau": {
+            "title": "Niveau",
+            "type": "string"
+          },
+          "nom": {
+            "title": "Nom",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "etablissement_id",
+          "enseignant_id",
+          "nom",
+          "niveau"
+        ],
+        "title": "ClasseResume",
+        "type": "object"
+      },
+      "DemandeSynchronisation": {
+        "properties": {
+          "evenements": {
+            "items": {
+              "$ref": "#/components/schemas/EvenementEntrant"
+            },
+            "maxItems": 50,
+            "minItems": 1,
+            "title": "Evenements",
+            "type": "array"
+          }
+        },
+        "required": [
+          "evenements"
+        ],
+        "title": "DemandeSynchronisation",
+        "type": "object"
+      },
+      "EvenementEntrant": {
+        "properties": {
+          "charge": {
+            "additionalProperties": true,
+            "description": "Contenu libre de l'événement (objet JSON)",
+            "title": "Charge",
+            "type": "object"
+          },
+          "id": {
+            "description": "Identifiant unique généré par le mobile : sert à ignorer les doublons",
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "survenu_le": {
+            "format": "date-time",
+            "title": "Survenu Le",
+            "type": "string"
+          },
+          "tentative_id": {
+            "format": "uuid",
+            "title": "Tentative Id",
+            "type": "string"
+          },
+          "type": {
+            "description": "Type d'événement en snake_case",
+            "pattern": "^[a-z][a-z0-9_]{0,49}$",
+            "title": "Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "tentative_id",
+          "type",
+          "survenu_le"
+        ],
+        "title": "EvenementEntrant",
+        "type": "object"
+      },
+      "ExperienceDetail": {
+        "properties": {
+          "id": {
+            "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+            "title": "Id",
+            "type": "string"
+          },
+          "matiere": {
+            "enum": [
+              "physique",
+              "chimie",
+              "svt",
+              "genie_civil"
+            ],
+            "title": "Matiere",
+            "type": "string"
+          },
+          "niveau": {
+            "default": "",
+            "title": "Niveau",
+            "type": "string"
+          },
+          "parametres": {
+            "additionalProperties": true,
+            "description": "Paramètres de la simulation (le corrigé n'y figure jamais)",
+            "title": "Parametres",
+            "type": "object"
+          },
+          "titre": {
+            "title": "Titre",
+            "type": "string"
+          },
+          "version": {
+            "default": 1,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "matiere",
+          "titre",
+          "parametres"
+        ],
+        "title": "ExperienceDetail",
+        "type": "object"
+      },
+      "ExperienceResume": {
+        "properties": {
+          "id": {
+            "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+            "title": "Id",
+            "type": "string"
+          },
+          "matiere": {
+            "enum": [
+              "physique",
+              "chimie",
+              "svt",
+              "genie_civil"
+            ],
+            "title": "Matiere",
+            "type": "string"
+          },
+          "niveau": {
+            "default": "",
+            "title": "Niveau",
+            "type": "string"
+          },
+          "titre": {
+            "title": "Titre",
+            "type": "string"
+          },
+          "version": {
+            "default": 1,
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "matiere",
+          "titre"
+        ],
+        "title": "ExperienceResume",
+        "type": "object"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "title": "Detail",
+            "type": "array"
+          }
+        },
+        "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "LigneStatEtablissement": {
+        "properties": {
+          "etablissement_id": {
+            "format": "uuid",
+            "title": "Etablissement Id",
+            "type": "string"
+          },
+          "matiere": {
+            "enum": [
+              "physique",
+              "chimie",
+              "svt",
+              "genie_civil"
+            ],
+            "title": "Matiere",
+            "type": "string"
+          },
+          "nombre_eleves_actifs": {
+            "title": "Nombre Eleves Actifs",
+            "type": "integer"
+          },
+          "nombre_tentatives": {
+            "title": "Nombre Tentatives",
+            "type": "integer"
+          },
+          "score_moyen": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Moyen"
+          }
+        },
+        "required": [
+          "etablissement_id",
+          "matiere",
+          "nombre_eleves_actifs",
+          "nombre_tentatives"
+        ],
+        "title": "LigneStatEtablissement",
+        "type": "object"
+      },
+      "LigneStatMinistere": {
+        "properties": {
+          "etablissement_id": {
+            "format": "uuid",
+            "title": "Etablissement Id",
+            "type": "string"
+          },
+          "matiere": {
+            "enum": [
+              "physique",
+              "chimie",
+              "svt",
+              "genie_civil"
+            ],
+            "title": "Matiere",
+            "type": "string"
+          },
+          "nom_etablissement": {
+            "title": "Nom Etablissement",
+            "type": "string"
+          },
+          "nombre_eleves_actifs": {
+            "title": "Nombre Eleves Actifs",
+            "type": "integer"
+          },
+          "nombre_tentatives": {
+            "title": "Nombre Tentatives",
+            "type": "integer"
+          },
+          "score_moyen": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score Moyen"
+          }
+        },
+        "required": [
+          "etablissement_id",
+          "matiere",
+          "nombre_eleves_actifs",
+          "nombre_tentatives",
+          "nom_etablissement"
+        ],
+        "title": "LigneStatMinistere",
+        "type": "object"
+      },
+      "MessageHistorique": {
+        "properties": {
+          "contenu": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Contenu",
+            "type": "string"
+          },
+          "role": {
+            "enum": [
+              "eleve",
+              "assistant"
+            ],
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "role",
+          "contenu"
+        ],
+        "title": "MessageHistorique",
+        "type": "object"
+      },
+      "ProfilCourant": {
+        "properties": {
+          "etablissement_actif": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etablissement Actif"
+          },
+          "etablissement_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etablissement Id"
+          },
+          "etablissement_nom": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Etablissement Nom"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "nom": {
+            "title": "Nom",
+            "type": "string"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "nom",
+          "role"
+        ],
+        "title": "ProfilCourant",
+        "type": "object"
+      },
+      "QuestionAssistant": {
+        "properties": {
+          "derniere_erreur": {
+            "anyOf": [
+              {
+                "maxLength": 500,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Derniere Erreur"
+          },
+          "etat_experience": {
+            "additionalProperties": true,
+            "description": "État courant de la simulation",
+            "title": "Etat Experience",
+            "type": "object"
+          },
+          "experience_id": {
+            "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+            "title": "Experience Id",
+            "type": "string"
+          },
+          "historique": {
+            "description": "6 messages maximum",
+            "items": {
+              "$ref": "#/components/schemas/MessageHistorique"
+            },
+            "maxItems": 6,
+            "title": "Historique",
+            "type": "array"
+          },
+          "message": {
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Message",
+            "type": "string"
+          },
+          "niveau_indice": {
+            "default": 1,
+            "description": "1 = question, 2 = piste de méthode, 3 = indice précis",
+            "maximum": 3.0,
+            "minimum": 1.0,
+            "title": "Niveau Indice",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "experience_id",
+          "message"
+        ],
+        "title": "QuestionAssistant",
+        "type": "object"
+      },
+      "ReponseAssistant": {
+        "properties": {
+          "niveau_indice": {
+            "title": "Niveau Indice",
+            "type": "integer"
+          },
+          "reponse": {
+            "description": "120 mots maximum",
+            "title": "Reponse",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reponse",
+          "niveau_indice"
+        ],
+        "title": "ReponseAssistant",
+        "type": "object"
+      },
+      "ReponseErreur": {
+        "properties": {
+          "code": {
+            "description": "Code stable lisible par la machine, ex. acces_refuse",
+            "title": "Code",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": true,
+            "description": "Informations complémentaires",
+            "title": "Details",
+            "type": "object"
+          },
+          "message": {
+            "description": "Phrase lisible par l'utilisateur",
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ReponseErreur",
+        "type": "object"
+      },
+      "ReponseSynchronisation": {
+        "properties": {
+          "resultats": {
+            "description": "Un résultat par événement, dans l'ordre de la demande",
+            "items": {
+              "$ref": "#/components/schemas/ResultatEvenement"
+            },
+            "title": "Resultats",
+            "type": "array"
+          }
+        },
+        "required": [
+          "resultats"
+        ],
+        "title": "ReponseSynchronisation",
+        "type": "object"
+      },
+      "ResultatEvenement": {
+        "properties": {
+          "code": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Raison du refus, ex. tentative_introuvable",
+            "title": "Code"
+          },
+          "doublon": {
+            "default": false,
+            "description": "Vrai si l'événement avait déjà été reçu (il est ignoré)",
+            "title": "Doublon",
+            "type": "boolean"
+          },
+          "evenement_id": {
+            "format": "uuid",
+            "title": "Evenement Id",
+            "type": "string"
+          },
+          "statut": {
+            "enum": [
+              "accepte",
+              "refuse"
+            ],
+            "title": "Statut",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evenement_id",
+          "statut"
+        ],
+        "title": "ResultatEvenement",
+        "type": "object"
+      },
+      "Tentative": {
+        "properties": {
+          "classe_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classe Id"
+          },
+          "debut_le": {
+            "format": "date-time",
+            "title": "Debut Le",
+            "type": "string"
+          },
+          "eleve_id": {
+            "format": "uuid",
+            "title": "Eleve Id",
+            "type": "string"
+          },
+          "experience_id": {
+            "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+            "title": "Experience Id",
+            "type": "string"
+          },
+          "fin_le": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fin Le"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resultat"
+          },
+          "score": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Score"
+          }
+        },
+        "required": [
+          "id",
+          "eleve_id",
+          "experience_id",
+          "debut_le"
+        ],
+        "title": "Tentative",
+        "type": "object"
+      },
+      "TentativeCreation": {
+        "properties": {
+          "classe_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Classe de l'élève, si la tentative est faite en classe",
+            "title": "Classe Id"
+          },
+          "debut_le": {
+            "description": "ISO 8601 avec fuseau, ex. 2026-11-08T09:30:00Z",
+            "format": "date-time",
+            "title": "Debut Le",
+            "type": "string"
+          },
+          "experience_id": {
+            "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+            "title": "Experience Id",
+            "type": "string"
+          },
+          "fin_le": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Fin de la tentative, si elle a été terminée hors ligne avant sa synchronisation.",
+            "title": "Fin Le"
+          },
+          "id": {
+            "description": "Identifiant généré par le mobile (permet de créer hors ligne, sans doublon)",
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "resultat": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Compte rendu structuré fourni par le moteur de simulation.",
+            "title": "Resultat"
+          }
+        },
+        "required": [
+          "id",
+          "experience_id",
+          "debut_le"
+        ],
+        "title": "TentativeCreation",
+        "type": "object"
+      },
+      "ValidationError": {
+        "properties": {
+          "ctx": {
+            "title": "Context",
+            "type": "object"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "title": "Location",
+            "type": "array"
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        },
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "HTTPBearer": {
+        "description": "Jeton d'accès Supabase",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "description": "Serveur des laboratoires virtuels EduLab AI. Erreurs : {code, message, details}.",
+    "title": "EduLab AI - API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/assistant/question": {
+      "post": {
+        "description": "Rôle : eleve. 10 questions par minute et par utilisateur ; message de 1000 caractères maximum ; 6 messages d'historique au plus ; réponse de 120 mots au plus. Le corrigé n'est jamais envoyé à l'IA.",
+        "operationId": "poser_question_assistant_question_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionAssistant"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseAssistant"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "introuvable : ressource absente ou masquée par les règles RLS"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "corps_trop_gros : plus de 256 ko"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "limite_atteinte : trop de requêtes"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Poser une question à l'assistant",
+        "tags": [
+          "assistant"
+        ]
+      }
+    },
+    "/classes": {
+      "get": {
+        "description": "Rôles : enseignant (ses classes), etablissement (les classes de l'établissement).",
+        "operationId": "lister_classes_classes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ClasseResume"
+                  },
+                  "title": "Response Lister Classes Classes Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Lister les classes",
+        "tags": [
+          "classes"
+        ]
+      }
+    },
+    "/classes/{classe_id}/bilan": {
+      "get": {
+        "description": "Rôles : enseignant, etablissement. Nombre d'élèves, de tentatives et score moyen, par expérience.",
+        "operationId": "bilan_classe_classes__classe_id__bilan_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "classe_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Classe Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BilanClasse"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "introuvable : ressource absente ou masquée par les règles RLS"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Bilan d'une classe",
+        "tags": [
+          "classes"
+        ]
+      }
+    },
+    "/experiences": {
+      "get": {
+        "description": "Catalogue des expériences. Tous les rôles connectés. Le corrigé n'est jamais renvoyé.",
+        "operationId": "lister_experiences_experiences_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "matiere",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "physique",
+                    "chimie",
+                    "svt",
+                    "genie_civil"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Matiere"
+            }
+          },
+          {
+            "in": "query",
+            "name": "niveau",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "minLength": 1,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Niveau"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ExperienceResume"
+                  },
+                  "title": "Response Lister Experiences Experiences Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Lister les expériences",
+        "tags": [
+          "experiences"
+        ]
+      }
+    },
+    "/experiences/{experience_id}": {
+      "get": {
+        "description": "Titre, matière et paramètres de la simulation. Tous les rôles connectés. Sans corrigé.",
+        "operationId": "lire_experience_experiences__experience_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "experience_id",
+            "required": true,
+            "schema": {
+              "pattern": "^(?:[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}|[a-z][a-z0-9_]{0,79})$",
+              "title": "Experience Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExperienceDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "introuvable : ressource absente ou masquée par les règles RLS"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Détail d'une expérience",
+        "tags": [
+          "experiences"
+        ]
+      }
+    },
+    "/moi": {
+      "get": {
+        "description": "Renvoie le profil associé au jeton Supabase courant.",
+        "operationId": "lire_profil_courant_moi_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfilCourant"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Lire le profil courant",
+        "tags": [
+          "profil"
+        ]
+      }
+    },
+    "/stats/etablissement": {
+      "get": {
+        "description": "Rôle : etablissement. Lit la vue agrégée vue_stats_etablissement (une ligne par matière).",
+        "operationId": "stats_etablissement_stats_etablissement_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LigneStatEtablissement"
+                  },
+                  "title": "Response Stats Etablissement Stats Etablissement Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Statistiques de l'établissement",
+        "tags": [
+          "stats"
+        ]
+      }
+    },
+    "/stats/ministere": {
+      "get": {
+        "description": "Rôle : ministere. Lit UNIQUEMENT la vue agrégée vue_stats_ministere (une ligne par établissement et par matière). Aucune table d'élèves n'est lue.",
+        "operationId": "stats_ministere_stats_ministere_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LigneStatMinistere"
+                  },
+                  "title": "Response Stats Ministere Stats Ministere Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Statistiques nationales",
+        "tags": [
+          "stats"
+        ]
+      }
+    },
+    "/tentatives": {
+      "get": {
+        "description": "Rôle : eleve. Renvoie les tentatives visibles selon les règles RLS.",
+        "operationId": "lister_tentatives_tentatives_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "taille",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "title": "Taille",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Tentative"
+                  },
+                  "title": "Response Lister Tentatives Tentatives Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Lister les tentatives de l'élève",
+        "tags": [
+          "tentatives"
+        ]
+      },
+      "post": {
+        "description": "Rôle : eleve. L'identifiant est fourni par le mobile ; rejouer la même demande renvoie la même tentative. fin_le permet de synchroniser une tentative terminée hors ligne.",
+        "operationId": "demarrer_tentative_tentatives_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TentativeCreation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tentative"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "conflit : identifiant déjà utilisé"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "corps_trop_gros : plus de 256 ko"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Créer ou synchroniser une tentative",
+        "tags": [
+          "tentatives"
+        ]
+      }
+    },
+    "/tentatives/sync": {
+      "post": {
+        "description": "Rôle : eleve. Reçoit de 1 à 50 événements et répond événement par événement (accepte ou refuse). Un événement déjà reçu est ignoré (doublon=true) : on peut rejouer l'envoi sans risque.",
+        "operationId": "synchroniser_evenements_tentatives_sync_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DemandeSynchronisation"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseSynchronisation"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "corps_trop_gros : plus de 256 ko"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Synchroniser des événements",
+        "tags": [
+          "tentatives"
+        ]
+      }
+    },
+    "/tentatives/{tentative_id}": {
+      "get": {
+        "description": "Rôles : eleve (les siennes), enseignant (celles de ses classes). Les règles RLS décident de la visibilité.",
+        "operationId": "lire_tentative_tentatives__tentative_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tentative_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Tentative Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Tentative"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "non_authentifie : jeton absent, invalide ou expiré"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "acces_refuse : rôle non autorisé ou règle RLS"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "introuvable : ressource absente ou masquée par les règles RLS"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "donnees_invalides : corps ou paramètres invalides"
+          },
+          "502": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "base_indisponible : erreur de la base"
+          },
+          "503": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReponseErreur"
+                }
+              }
+            },
+            "description": "assistant_indisponible ou base_indisponible"
+          }
+        },
+        "security": [
+          {
+            "HTTPBearer": []
+          }
+        ],
+        "summary": "Détail d'une tentative",
+        "tags": [
+          "tentatives"
+        ]
+      }
+    }
+  }
+}

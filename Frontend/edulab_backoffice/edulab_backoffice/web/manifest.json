@@ -1,0 +1,9 @@
+{
+  "name": "EduLab AI - Backoffice",
+  "short_name": "EduLab AI",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#0B5E1F",
+  "description": "Backoffice web EduLab AI"
+}

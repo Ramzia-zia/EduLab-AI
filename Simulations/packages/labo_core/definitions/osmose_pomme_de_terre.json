@@ -1,0 +1,32 @@
+{
+  "id": "osmose_pomme_de_terre",
+  "matiere": "svt",
+  "niveau": "premiere",
+  "materiel": [
+    "tube_1",
+    "tube_2",
+    "tube_3",
+    "tube_4",
+    "pomme_de_terre",
+    "eau_distillee",
+    "solution_saccharose_125",
+    "solution_saccharose_250",
+    "solution_saccharose_375",
+    "couteau",
+    "regle"
+  ],
+  "securite": [],
+  "conseils": [
+    {
+      "quand": "tubes_identiques",
+      "niveau": "avertissement",
+      "message": "Deux tubes contiennent la même solution. Change l'un d'eux pour pouvoir comparer."
+    },
+    {
+      "quand": "deux_heures_ecoulees",
+      "niveau": "information",
+      "message": "Deux heures se sont écoulées. Tu peux sortir les tranches et remesurer leur longueur."
+    }
+  ],
+  "calcul": "svt_osmose"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "titrage_acide_base",
+  "matiere": "chimie",
+  "niveau": "terminale",
+  "materiel": [
+    "lunettes",
+    "burette",
+    "becher",
+    "soude",
+    "erlenmeyer",
+    "pipette",
+    "phenolphtaleine"
+  ],
+  "securite": [
+    {
+      "regle_id": "lunettes_avant_soude",
+      "avant": "tourner_robinet",
+      "exige": "lunettes",
+      "message": "Mets d'abord tes lunettes : la soude peut abîmer les yeux."
+    }
+  ],
+  "conseils": [
+    {
+      "quand": "volume_proche_equivalence",
+      "niveau": "avertissement",
+      "message": "Tu approches de l'équivalence. Ralentis : goutte à goutte."
+    },
+    {
+      "quand": "equivalence_atteinte",
+      "niveau": "validation",
+      "message": "Le rose pâle persiste : repère le volume versé sur la burette."
+    }
+  ],
+  "calcul": "titrage"
+}
