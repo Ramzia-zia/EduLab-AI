@@ -8,6 +8,15 @@
     python -m uvicorn app.main:app --reload
 Documentation interactive : http://localhost:8000/docs
 
+## Assistant Gemini
+Créer une clé API dans [Google AI Studio](https://aistudio.google.com/apikey),
+puis la définir dans `GEMINI_API_KEY` dans le `.env` du backend. Le modèle par
+défaut est `gemini-3.5-flash-lite`, accessible dans le niveau gratuit selon les
+quotas et les disponibilités de Google ; `GEMINI_MODEL` permet de le remplacer.
+La clé doit rester côté serveur et ne jamais être ajoutée au frontend.
+Le niveau gratuit peut utiliser les contenus soumis pour améliorer les produits
+Google : ne transmettez pas de données personnelles ou sensibles d'élèves.
+
 ## Préparer Supabase
 Dans le SQL Editor de Supabase, exécuter une seule fois
 [`20261125140000_schema_rls.sql`](../supabase/migrations/20261125140000_schema_rls.sql).

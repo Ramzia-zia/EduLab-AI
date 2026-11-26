@@ -6,7 +6,7 @@ from fastapi import Depends, Request
 
 from app.config import Reglages, lire_reglages
 from app.db import SupabaseClient
-from app.services.assistant_ia import FournisseurAnthropic
+from app.services.assistant_ia import FournisseurGemini
 from app.services.limiteur import LimiteurDebit
 
 
@@ -24,8 +24,8 @@ def get_db(http: httpx.AsyncClient = Depends(get_http), reglages: Reglages = Dep
 
 def get_fournisseur_ia(
     http: httpx.AsyncClient = Depends(get_http), reglages: Reglages = Depends(get_reglages)
-) -> FournisseurAnthropic:
-    return FournisseurAnthropic(http, reglages.ia_cle_api, reglages.ia_modele)
+) -> FournisseurGemini:
+    return FournisseurGemini(http, reglages.gemini_api_key, reglages.gemini_model)
 
 
 @lru_cache

@@ -1,12 +1,15 @@
 """Les vrais clients HTTP (Supabase, IA), testés avec un faux réseau."""
+import json
+
 import httpx
 import pytest
 
 from app.db import SupabaseClient
 from app.erreurs import ErreurApi
-from app.services.assistant_ia import FournisseurAnthropic
+from app.services.assistant_ia import FournisseurGemini
 
 URL = "https://projet.supabase.co"
+URL_GEMINI = "https://generativelanguage.googleapis.com/v1beta/models/modele_x:generateContent"
 
 
 def client_supabase(gestionnaire) -> SupabaseClient:
@@ -75,8 +78,8 @@ async def test_base_injoignable_503():
     assert (e.value.statut, e.value.code) == (503, "base_indisponible")
 
 
-def fournisseur(gestionnaire) -> FournisseurAnthropic:
-    return FournisseurAnthropic(httpx.AsyncClient(transport=httpx.MockTransport(gestionnaire)), "cle_ia", "modele_x")
+def fournisseur(gestionnaire) -> FournisseurGemini:
+    return FournisseurGemini(httpx.AsyncClient(transport=httpx.MockTransport(gestionnaire)), "cle_ia", "modele_x")
 
 
 @pytest.mark.anyio
@@ -84,12 +87,25 @@ async def test_ia_reponse_normale():
     vu = {}
 
     def gestionnaire(requete: httpx.Request) -> httpx.Response:
-        vu["cle"] = requete.headers["x-api-key"]
-        vu["corps"] = requete.content.decode()
-        return httpx.Response(200, json={"content": [{"type": "text", "text": "Bonjour "}, {"type": "text", "text": "!"}]})
+        vu["cle"] = requete.headers["x-goog-api-key"]
+        vu["url"] = str(requete.url)
+        vu["corps"] = requete.read().decode()
+        return httpx.Response(
+            200,
+            json={"candidates": [{"content": {"parts": [{"text": "Bonjour "}, {"text": "!"}]}}]},
+        )
 
-    assert await fournisseur(gestionnaire).repondre("systeme", [{"role": "user", "content": "salut"}]) == "Bonjour !"
-    assert vu["cle"] == "cle_ia" and '"modele_x"' in vu["corps"]
+    messages = [{"role": "user", "content": "salut"}, {"role": "assistant", "content": "Bonjour."}]
+    assert await fournisseur(gestionnaire).repondre("systeme", messages) == "Bonjour !"
+    corps = json.loads(vu["corps"])
+    assert vu["cle"] == "cle_ia"
+    assert vu["url"] == URL_GEMINI
+    assert corps["systemInstruction"] == {"parts": [{"text": "systeme"}]}
+    assert corps["contents"] == [
+        {"role": "user", "parts": [{"text": "salut"}]},
+        {"role": "model", "parts": [{"text": "Bonjour."}]},
+    ]
+    assert corps["generationConfig"]["maxOutputTokens"] == 400
 
 
 @pytest.mark.anyio
@@ -101,3 +117,13 @@ async def test_ia_en_echec_503(reponse):
     with pytest.raises(ErreurApi) as e:
         await fournisseur(lambda r: reponse).repondre("s", [{"role": "user", "content": "x"}])
     assert (e.value.statut, e.value.code) == (503, "assistant_indisponible")
+
+
+@pytest.mark.anyio
+async def test_cle_api_absente_de_l_erreur():
+    def gestionnaire(requete: httpx.Request) -> httpx.Response:
+        return httpx.Response(403, text="cle_ia invalide")
+
+    with pytest.raises(ErreurApi) as erreur:
+        await fournisseur(gestionnaire).repondre("s", [{"role": "user", "content": "x"}])
+    assert "cle_ia" not in str(erreur.value)

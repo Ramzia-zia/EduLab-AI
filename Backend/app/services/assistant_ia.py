@@ -2,6 +2,7 @@
 import json
 import re
 from typing import Any, Protocol
+from urllib.parse import quote
 
 import httpx
 
@@ -9,7 +10,7 @@ from app.erreurs import ErreurApi
 from app.schemas.assistant import MessageHistorique, QuestionAssistant, ReponseAssistant
 from app.services.prompt_assistant import MOTS_MAX, PROMPT_SYSTEME
 
-URL_API_IA = "https://api.anthropic.com/v1/messages"  # fournisseur à confirmer par l'équipe
+URL_API_GEMINI = "https://generativelanguage.googleapis.com/v1beta/models/{modele}:generateContent"
 TAILLE_MAX_ETAT = 2000  # caractères d'état envoyés à l'IA
 
 
@@ -17,20 +18,44 @@ class FournisseurIA(Protocol):
     async def repondre(self, systeme: str, messages: list[dict[str, str]]) -> str: ...
 
 
-class FournisseurAnthropic:
+class FournisseurGemini:
     def __init__(self, http: httpx.AsyncClient, cle_api: str, modele: str) -> None:
         self._http = http
         self._cle_api = cle_api
         self._modele = modele
 
     async def repondre(self, systeme: str, messages: list[dict[str, str]]) -> str:
-        corps = {"model": self._modele, "max_tokens": 400, "system": systeme, "messages": messages}
-        entetes = {"x-api-key": self._cle_api, "anthropic-version": "2023-06-01", "content-type": "application/json"}
+        corps = {
+            "systemInstruction": {"parts": [{"text": systeme}]},
+            "contents": [
+                {
+                    "role": "model" if message["role"] == "assistant" else "user",
+                    "parts": [{"text": message["content"]}],
+                }
+                for message in messages
+            ],
+            "generationConfig": {"maxOutputTokens": 400},
+        }
+        entetes = {"x-goog-api-key": self._cle_api, "content-type": "application/json"}
+        url = URL_API_GEMINI.format(modele=quote(self._modele, safe=""))
         try:
-            reponse = await self._http.post(URL_API_IA, json=corps, headers=entetes, timeout=25.0)
+            reponse = await self._http.post(url, json=corps, headers=entetes, timeout=25.0)
             reponse.raise_for_status()
-            blocs = reponse.json()["content"]
-            texte = "".join(b.get("text", "") for b in blocs if b.get("type") == "text").strip()
+            donnees = reponse.json()
+            candidats = donnees.get("candidates") if isinstance(donnees, dict) else None
+            texte = ""
+            if isinstance(candidats, list):
+                for candidat in candidats:
+                    contenu = candidat.get("content") if isinstance(candidat, dict) else None
+                    parties = contenu.get("parts") if isinstance(contenu, dict) else None
+                    if isinstance(parties, list):
+                        texte = "".join(
+                            partie["text"]
+                            for partie in parties
+                            if isinstance(partie, dict) and isinstance(partie.get("text"), str)
+                        ).strip()
+                    if texte:
+                        break
         except (httpx.HTTPError, KeyError, ValueError, TypeError) as exc:
             raise ErreurApi(503, "assistant_indisponible", "L'assistant ne répond pas pour le moment.") from exc
         if not texte:
