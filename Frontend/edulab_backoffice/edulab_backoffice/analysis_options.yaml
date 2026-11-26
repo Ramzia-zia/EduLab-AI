@@ -1,0 +1,11 @@
+analyzer:
+  exclude:
+    - build/**
+    - web/**
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    # Le contrat impose snake_case en francais sans accents partout, y compris en Dart.
+    non_constant_identifier_names: false
+    constant_identifier_names: false
